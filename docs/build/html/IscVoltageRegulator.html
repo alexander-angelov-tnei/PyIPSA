@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IscVoltageRegulator &mdash; PyIPSA 1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="IscUnbalancedLine" href="IscUnbalancedLine.html" />
+    <link rel="prev" title="IscPlugin" href="IscPlugin.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> PyIPSA
+            <img src="_static/ipsa_wo_small.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                v2.10.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Changes%20from%20IPSA%202.9.0.html">Changes from IPSA 2.9.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IPSA%20and%20Python.html">Ipsa and Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Coding%20Requirements.html">Coding Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscInterface.html">IscInterface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscDiagram.html">IscDiagram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscNetwork.html">IscNetwork</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscAnalysis.html">IscAnalysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscNetComponent.html">IscNetComponent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscNetworkData.html">IscNetworkData</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscBusbar.html">IscBusbar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscBranch.html">IscBranch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscTransformer.html">IscTransformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Isc3WTransformer.html">Isc3WTransformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscLoad.html">IscLoad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscCircuitBreaker.html">IscCircuitBreaker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscIndMachine.html">IscIndMachine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscSynMachine.html">IscSynMachine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscGridInfeed.html">IscGridInfeed</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscFilter.html">IscFilter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscHarmonic.html">IscHarmonic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscStaticVC.html">IscStaticVC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscUMachine.html">IscUMachine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscBattery.html">IscBattery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscDCMachine.html">IscDCMachine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscConverter.html">IscConverter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscMGSet.html">IscMGSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscMechSwCapacitor.html">IscMechSwCapacitor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscGroup.html">IscGroup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscPlugin.html">IscPlugin</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">IscVoltageRegulator</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#field-values">Field Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#iscvoltageregulator-class">IscVoltageRegulator Class</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="IscUnbalancedLine.html">IscUnbalancedLine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscUnbalancedLoad.html">IscUnbalancedLoad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscUnbalancedTransformer.html">IscUnbalancedTransformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscAnnotation.html">IscAnnotation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscProtectionDevice.html">IscProtectionDevice</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PyIPSA</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>IscVoltageRegulator</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/IscVoltageRegulator.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="iscvoltageregulator">
+<h1>IscVoltageRegulator<a class="headerlink" href="#iscvoltageregulator" title="Permalink to this headline"></a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">IscVoltageRegulator</span></code> class provides access to a series voltage regulator to get and set data values.</p>
+<section id="field-values">
+<h2>Field Values<a class="headerlink" href="#field-values" title="Permalink to this headline"></a></h2>
+<table class="colwidths-given tight-table docutils align-default" id="id1">
+<caption><span class="caption-text"><strong>IscVoltageRegulator Field Values</strong></span><a class="headerlink" href="#id1" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 23%" />
+<col style="width: 68%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Field Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Integer</p></td>
+<td><p>FromUID</p></td>
+<td><p>Gets the unique ID for busbar.</p></td>
+</tr>
+<tr class="row-odd"><td><p>String</p></td>
+<td><p>FromBusName</p></td>
+<td><p>Returns the busbar name at the From end of the branch the regulator is located on.</p></td>
+</tr>
+<tr class="row-even"><td><p>String</p></td>
+<td><p>ToBusName</p></td>
+<td><p>Returns the busbar name at the To end of the branch the regulator is located on.</p></td>
+</tr>
+<tr class="row-odd"><td><p>String</p></td>
+<td><p>Name</p></td>
+<td><p>Name of the voltage regulator.</p></td>
+</tr>
+<tr class="row-even"><td><p>Integer</p></td>
+<td><p>Status</p></td>
+<td><p>Status of voltage regulator:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>0 = Switched in</p></li>
+<li><p>-1 = Switched out</p></li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Float</p></td>
+<td><p>ResistancePU</p></td>
+<td><p>Gets or sets the resistance of the voltage regulator in per unit.</p></td>
+</tr>
+<tr class="row-even"><td><p>Float</p></td>
+<td><p>ReactancePU</p></td>
+<td><p>Gets or sets the reactance of the voltage regulator in per unit.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Float</p></td>
+<td><p>TapStart</p></td>
+<td><p>Present tap position, used as a starting point for the next load flow.</p></td>
+</tr>
+<tr class="row-even"><td><p>Float</p></td>
+<td><p>MinTap</p></td>
+<td><p>Minimum tap position, normally negative or zero.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Float</p></td>
+<td><p>TapStep</p></td>
+<td><p>Tap increment. This defaults to 0.01 if left blank.</p></td>
+</tr>
+<tr class="row-even"><td><p>Float</p></td>
+<td><p>MaxTap</p></td>
+<td><p>Maximum tap position, normally positive or zero.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Integer</p></td>
+<td><p>ControlsUID</p></td>
+<td><p>Returns the UID of the branch that the voltage regulator is located on.</p></td>
+</tr>
+<tr class="row-even"><td><p>Integer</p></td>
+<td><p>ControlMode</p></td>
+<td><p>Gets or sets the control mode of the voltage regulator as defined by:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>0 = Manual tap control</p></li>
+<li><p>1 = Forward locked mode</p></li>
+<li><p>2 = Reverse locked mode</p></li>
+<li><p>3 = Neutral reverse mode</p></li>
+<li><p>4 = Cogeneration mode</p></li>
+<li><p>5 = Normal bi-directional mode</p></li>
+<li><p>6 = Reactive bi-directional mode</p></li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Float</p></td>
+<td><p>VoltageSetpointForward</p></td>
+<td><p>Gets or sets the target voltage in per unit when operating in the forward direction.</p></td>
+</tr>
+<tr class="row-even"><td><p>Float</p></td>
+<td><p>CompensatingRForward</p></td>
+<td><p>Gets or sets the compensating resistance in per unit when operating in the forward direction.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Float</p></td>
+<td><p>CompensatingXForward</p></td>
+<td><p>Gets or sets the compensating reactance in per unit when operating in the forward direction.</p></td>
+</tr>
+<tr class="row-even"><td><p>Float</p></td>
+<td><p>VoltageSetpointBackward</p></td>
+<td><p>Gets or sets the target voltage in per unit when operating in the reverse direction.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Float</p></td>
+<td><p>CompensatingRBackward</p></td>
+<td><p>Gets or sets the compensating resistance in per unit when operating in the reverse direction.</p></td>
+</tr>
+<tr class="row-even"><td><p>Float</p></td>
+<td><p>CompensatingXBackward</p></td>
+<td><p>Gets or sets the compensating reactance in per unit when operating in the reverse direction.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="iscvoltageregulator-class">
+<h2>IscVoltageRegulator Class<a class="headerlink" href="#iscvoltageregulator-class" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ipsa.IscVoltageRegulator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ipsa.</span></span><span class="sig-name descname"><span class="pre">IscVoltageRegulator</span></span><a class="headerlink" href="#ipsa.IscVoltageRegulator" title="Permalink to this definition"></a></dt>
+<dd><p>Provides access to a series voltage regulator.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscVoltageRegulator.GetBValue">
+<span class="sig-name descname"><span class="pre">GetBValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nFieldIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#ipsa.IscVoltageRegulator.GetBValue" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a boolean value for the enumerated field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>nFieldIndex</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The field index.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The boolean value.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscVoltageRegulator.GetBranchUID">
+<span class="sig-name descname"><span class="pre">GetBranchUID</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#ipsa.IscVoltageRegulator.GetBranchUID" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the UID of the branch that the voltage regulator is located on.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The branch UID.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscVoltageRegulator.GetDValue">
+<span class="sig-name descname"><span class="pre">GetDValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nFieldIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscVoltageRegulator.GetDValue" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a double value for the enumerated field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>nFieldIndex</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The field index.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The double value.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscVoltageRegulator.GetIValue">
+<span class="sig-name descname"><span class="pre">GetIValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nFieldIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#ipsa.IscVoltageRegulator.GetIValue" title="Permalink to this definition"></a></dt>
+<dd><p>Returns an integer value for the enumerated field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>nFieldIndex</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The field index.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The integer value.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscVoltageRegulator.GetSValue">
+<span class="sig-name descname"><span class="pre">GetSValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nFieldIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#ipsa.IscVoltageRegulator.GetSValue" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a string value for the enumerated field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>nFieldIndex</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The field index.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The string value.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscVoltageRegulator.SetBValue">
+<span class="sig-name descname"><span class="pre">SetBValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nFieldIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">bValue</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#ipsa.IscVoltageRegulator.SetBValue" title="Permalink to this definition"></a></dt>
+<dd><p>Sets the value for the enumerated field from boolean.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nFieldIndex</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The field index.</p></li>
+<li><p><strong>bValue</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – The given boolean value.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if successful.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscVoltageRegulator.SetDValue">
+<span class="sig-name descname"><span class="pre">SetDValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nFieldIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">dValue</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#ipsa.IscVoltageRegulator.SetDValue" title="Permalink to this definition"></a></dt>
+<dd><p>Sets the value for the enumerated field from a double.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nFieldIndex</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The field index.</p></li>
+<li><p><strong>dValue</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – The given double value.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if successful.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscVoltageRegulator.SetIValue">
+<span class="sig-name descname"><span class="pre">SetIValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nFieldIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">nValue</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#ipsa.IscVoltageRegulator.SetIValue" title="Permalink to this definition"></a></dt>
+<dd><p>Sets the value for the enumerated field from an integer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nFieldIndex</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The field index.</p></li>
+<li><p><strong>nValue</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The given integer value.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if successful.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscVoltageRegulator.SetName">
+<span class="sig-name descname"><span class="pre">SetName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strName</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#ipsa.IscVoltageRegulator.SetName" title="Permalink to this definition"></a></dt>
+<dd><p>Sets the name as a string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>strName</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The selected string name.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if successful.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscVoltageRegulator.SetSValue">
+<span class="sig-name descname"><span class="pre">SetSValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nFieldIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">strValue</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#ipsa.IscVoltageRegulator.SetSValue" title="Permalink to this definition"></a></dt>
+<dd><p>Sets the value for the enumerated field from a string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nFieldIndex</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The field index.</p></li>
+<li><p><strong>strValue</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The given string value.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if successful.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="IscPlugin.html" class="btn btn-neutral float-left" title="IscPlugin" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="IscUnbalancedLine.html" class="btn btn-neutral float-right" title="IscUnbalancedLine" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright IPSA.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IscInterface &mdash; PyIPSA 1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="IscDiagram" href="IscDiagram.html" />
+    <link rel="prev" title="Coding Requirements" href="Coding%20Requirements.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> PyIPSA
+            <img src="_static/ipsa_wo_small.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                v2.10.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Changes%20from%20IPSA%202.9.0.html">Changes from IPSA 2.9.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IPSA%20and%20Python.html">Ipsa and Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Coding%20Requirements.html">Coding Requirements</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">IscInterface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#debugging-options">Debugging Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#iscinterface-class">IscInterface Class</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="IscDiagram.html">IscDiagram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscNetwork.html">IscNetwork</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscAnalysis.html">IscAnalysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscNetComponent.html">IscNetComponent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscNetworkData.html">IscNetworkData</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscBusbar.html">IscBusbar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscBranch.html">IscBranch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscTransformer.html">IscTransformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Isc3WTransformer.html">Isc3WTransformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscLoad.html">IscLoad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscCircuitBreaker.html">IscCircuitBreaker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscIndMachine.html">IscIndMachine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscSynMachine.html">IscSynMachine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscGridInfeed.html">IscGridInfeed</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscFilter.html">IscFilter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscHarmonic.html">IscHarmonic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscStaticVC.html">IscStaticVC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscUMachine.html">IscUMachine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscBattery.html">IscBattery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscDCMachine.html">IscDCMachine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscConverter.html">IscConverter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscMGSet.html">IscMGSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscMechSwCapacitor.html">IscMechSwCapacitor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscGroup.html">IscGroup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscPlugin.html">IscPlugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscVoltageRegulator.html">IscVoltageRegulator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscUnbalancedLine.html">IscUnbalancedLine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscUnbalancedLoad.html">IscUnbalancedLoad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscUnbalancedTransformer.html">IscUnbalancedTransformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscAnnotation.html">IscAnnotation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscProtectionDevice.html">IscProtectionDevice</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PyIPSA</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>IscInterface</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/IscInterface.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="iscinterface">
+<h1>IscInterface<a class="headerlink" href="#iscinterface" title="Permalink to this headline"></a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">IscInterface</span></code> class is the main interface class used to access all other IPSA objects and functions. It <strong>must</strong> be created before any other references to IPSA objects. To create an instance from Python the following commands are required when running IPSA with the User Interface:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run inside the IPSA User Interface</span>
+<span class="kn">import</span> <span class="nn">ipsa</span>
+<span class="n">ipsascript</span> <span class="o">=</span> <span class="n">ipsa</span><span class="o">.</span><span class="n">GetScriptInterface</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">GetScriptInterface()</span></code> returns an <code class="docutils literal notranslate"><span class="pre">IscInterface</span></code> instance which can then be used to access all other IPSA objects. The following sections provide the syntax for all other <code class="docutils literal notranslate"><span class="pre">IscInterface</span></code> functions.</p>
+<p>Alternatively the following code returns the <code class="docutils literal notranslate"><span class="pre">IscInterface</span></code> object when IPSA is running without a User Interface:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run with No User Interface</span>
+<span class="kn">import</span> <span class="nn">ipsa</span>
+<span class="n">ipsascript</span> <span class="o">=</span> <span class="n">ipsa</span><span class="o">.</span><span class="n">IscInterface</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>The functions</strong> <code class="docutils literal notranslate"><span class="pre">IscInterface</span></code>  <strong>and</strong> <code class="docutils literal notranslate"><span class="pre">GetScriptInterface</span></code>  <strong>must only be called once for each running process.</strong>
+<strong>Unexpected errors will occur if multiple calls to the above functions are made!</strong></p>
+<section id="debugging-options">
+<h2>Debugging Options<a class="headerlink" href="#debugging-options" title="Permalink to this headline"></a></h2>
+<p>To aid the development of scripted applications a number of debugging functions have been provided. These functions allow logging and timing of the analysis routines by providing detailed information on the analysis settings and data loaded into the analysis engines. The example below shows the output generated from a <code class="docutils literal notranslate"><span class="pre">DoLoadFlow()</span></code> function on a small test network.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">IlfSetParameters</span><span class="p">:</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span><span class="mi">250</span><span class="p">,</span><span class="mi">250</span><span class="p">,</span><span class="mi">250</span><span class="p">,</span><span class="mi">250</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">IlfSetRunOpts</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">IlfAddBusbarWithName</span><span class="p">:</span> <span class="p">([</span><span class="mi">1</span><span class="p">]:</span> <span class="o">&lt;</span><span class="n">b</span><span class="o">&gt;</span><span class="n">Busbar1</span><span class="o">&lt;/</span><span class="n">b</span><span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">IlfAddBusbarWithName</span><span class="p">:</span> <span class="p">([</span><span class="mi">2</span><span class="p">]:</span> <span class="o">&lt;</span><span class="n">b</span><span class="o">&gt;</span><span class="n">Busbar2</span><span class="o">&lt;/</span><span class="n">b</span><span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">2e-005</span><span class="p">)</span>
+<span class="n">IlfAddUniversalMachine</span><span class="p">:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">IlfAddGridInfeed</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mf">4.00037e-005</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">IlfAddBranch</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">0.0001</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">IlfSetSlkBus</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">IlfDoCalc</span><span class="p">:</span> <span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">IlfGetBusResults</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.000529898</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.00267593</span><span class="p">)</span>
+<span class="n">IlfGetBusResults</span><span class="p">:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1.99973e-005</span><span class="p">,</span> <span class="mf">0.000265069</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">IlfGetGridInfeedResults</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.00026</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.00263594</span><span class="p">)</span>
+<span class="n">IlfGetUMachResults</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">IlfGetLineResults</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.99973</span><span class="p">,</span> <span class="mf">3.99892e-005</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.99973</span><span class="p">,</span> <span class="o">-</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="iscinterface-class">
+<h2>IscInterface Class<a class="headerlink" href="#iscinterface-class" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ipsa.IscInterface">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ipsa.</span></span><span class="sig-name descname"><span class="pre">IscInterface</span></span><a class="headerlink" href="#ipsa.IscInterface" title="Permalink to this definition"></a></dt>
+<dd><p>The main interface class used to access all other IPSA objects and functions.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.AllowStackBarUpdates">
+<span class="sig-name descname"><span class="pre">AllowStackBarUpdates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bAllow</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ipsa.IscInterface.AllowStackBarUpdates" title="Permalink to this definition"></a></dt>
+<dd><p>Setting bAllow to True prevents the Ipsa stack bar from updating during script execution.
+This can provide speed improvements since redrawing the stack bar is prevented.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>bAllow</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – Deciding whether the Ipsa stack bar can be updated during script execution.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.AskQuestion">
+<span class="sig-name descname"><span class="pre">AskQuestion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strDialogTitle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">strQuestion</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#ipsa.IscInterface.AskQuestion" title="Permalink to this definition"></a></dt>
+<dd><p>Display a message box with a title and a question as shown below.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>strDialogTitle</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The title of the message box.</p></li>
+<li><p><strong>strQuestion</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The question displayed on the message box.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True when the user clicks Yes, otherwise False.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.CloseNetwork">
+<span class="sig-name descname"><span class="pre">CloseNetwork</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#ipsa.IscInterface.CloseNetwork" title="Permalink to this definition"></a></dt>
+<dd><p>Closes the current network. Returns False if the network can’t be closed, e.g. if there is unsaved data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Boolean denoting whether the network is closed.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.CloseResultsTable">
+<span class="sig-name descname"><span class="pre">CloseResultsTable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nTableType</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ipsa.IscInterface.CloseResultsTable" title="Permalink to this definition"></a></dt>
+<dd><p>Closes the results’ table nTableType which is as defined for the DisplayResultsTable function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>nTableType</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The type defined for the DisplayResultsTable function.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.CreateNewNetwork">
+<span class="sig-name descname"><span class="pre">CreateNewNetwork</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dSystemBaseMVA</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">dFrequencyHz</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">bWithDiagram</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">bIsDiagramSingleLine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">dGeoSceneScale</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">nSceneMeasurementUnit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#ipsa.IscInterface.CreateNewNetwork" title="Permalink to this definition"></a></dt>
+<dd><p>Creates a new Ipsa network based on the supplied parameters. Returns False if the network can’t be created.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dSystemBaseMVA</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – The network base MVA.</p></li>
+<li><p><strong>dFrequencyHz</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – The nominal network frequency in hertz.</p></li>
+<li><p><strong>bWithDiagram</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – Denoting whether the diagram is required.</p></li>
+<li><p><strong>bIsDiagramSingleLine</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – True if a normal single line diagram type is required,
+False if the diagram is a scaled geographic diagram.</p></li>
+<li><p><strong>dGeoSceneScale</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – The scaling factor used to locate or size network components on geographic diagrams.</p></li>
+<li><p><strong>nSceneMeasurementUnit</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – <p>The unit used for the geographic scale.</p>
+<ul>
+<li><p>0 if Millimetres</p></li>
+<li><p>1 if Centimetres</p></li>
+<li><p>2 if Metres</p></li>
+<li><p>3 if Kilometres</p></li>
+<li><p>4 if Inches</p></li>
+<li><p>5 if Feet</p></li>
+<li><p>6 if Yards</p></li>
+<li><p>7 if Miles</p></li>
+</ul>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Boolean denoting whether a network can be created.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.DbgSetLogFileName">
+<span class="sig-name descname"><span class="pre">DbgSetLogFileName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strName</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ipsa.IscInterface.DbgSetLogFileName" title="Permalink to this definition"></a></dt>
+<dd><p>Set the name of the load flow log file to strName.
+If no file path is specified then the file is created in the Ipsa bin directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>strName</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The name of the load flow log file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.DbgStartLogging">
+<span class="sig-name descname"><span class="pre">DbgStartLogging</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ipsa.IscInterface.DbgStartLogging" title="Permalink to this definition"></a></dt>
+<dd><p>Start logging of all analysis engine calls.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.DbgStopLogging">
+<span class="sig-name descname"><span class="pre">DbgStopLogging</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ipsa.IscInterface.DbgStopLogging" title="Permalink to this definition"></a></dt>
+<dd><p>Stop logging of all analysis engine calls.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.DisplayResultsTable">
+<span class="sig-name descname"><span class="pre">DisplayResultsTable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nTableType</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ipsa.IscInterface.DisplayResultsTable" title="Permalink to this definition"></a></dt>
+<dd><p>Displays the Ipsa results table which will contain the results of the last analysis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>nTableType</strong> – <p>Specify the type of table displayed:</p>
+<ul class="simple">
+<li><p>ipsa.IscInterface.BusbarLF = busbar load flow results</p></li>
+<li><p>ipsa.IscInterface.GeneratorLF = generator load flow results</p></li>
+<li><p>ipsa.IscInterface.GridInfeedLF = grid infeed load flow results</p></li>
+<li><p>ipsa.IscInterface.LoadLF = load object load flow results</p></li>
+<li><p>ipsa.IscInterface.IMachineLF = motor load flow results</p></li>
+<li><p>ipsa.IscInterface.StaticVCLF = SVC load flow results</p></li>
+<li><p>ipsa.IscInterface.MechSwCapLF = switched capacitor load flow results</p></li>
+<li><p>ipsa.IscInterface.UMachineLF = universal machine load flow results</p></li>
+<li><p>ipsa.IscInterface.FilterLF = harmonic filter load flow results</p></li>
+<li><p>ipsa.IscInterface.LineLF = branch load flow results</p></li>
+<li><p>ipsa.IscInterface.TransformerLF = transformer load flow results</p></li>
+<li><p>ipsa.IscInterface.ThreeWindingTransformerLF = 3 winding transformer load flow results</p></li>
+<li><p>ipsa.IscInterface.BatteryLF = DC battery load flow results</p></li>
+<li><p>ipsa.IscInterface.DCMachineLF = DC machine load flow results</p></li>
+<li><p>ipsa.IscInterface.ConverterLF = AC-DC converter load flow results</p></li>
+<li><p>ipsa.IscInterface.MGSetLF = motor- generator set load flow results</p></li>
+<li><p>ipsa.IscInterface.BusbarFL = busbar fault level results</p></li>
+<li><p>ipsa.IscInterface.GeneratorFL = generator fault level results</p></li>
+<li><p>ipsa.IscInterface.GridInfeedFL = grid infeed fault level results</p></li>
+<li><p>ipsa.IscInterface.LoadFL = load object fault level results</p></li>
+<li><p>ipsa.IscInterface.IMachineFL = motor fault level results</p></li>
+<li><p>ipsa.IscInterface.LineFL = branch fault level results</p></li>
+<li><p>ipsa.IscInterface.TransformerFL = transformer fault level results</p></li>
+<li><p>ipsa.IscInterface.ThreeWindingTransformerFL = 3 winding transformer fault level results</p></li>
+<li><p>ipsa.IscInterface.BusbarHM = busbar harmonic analysis results</p></li>
+<li><p>ipsa.IscInterface.GeneratorHM = generator harmonic analysis results</p></li>
+<li><p>ipsa.IscInterface.LoadHM = load object harmonic analysis results</p></li>
+<li><p>ipsa.IscInterface.IMachineHM = motor harmonic analysis results</p></li>
+<li><p>ipsa.IscInterface.FilterHM = filter harmonic analysis results</p></li>
+<li><p>ipsa.IscInterface.LineHM = branch harmonic analysis results</p></li>
+<li><p>ipsa.IscInterface.TransformerHM = transformer harmonic analysis results</p></li>
+<li><p>ipsa.IscInterface.ThreeWindingTransformerHM = 3 winding transformer harmonic analysis results</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.GetAllDiagrams">
+<span class="sig-name descname"><span class="pre">GetAllDiagrams</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">network</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ipsa.IscInterface.GetAllDiagrams" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a tuple of IscDiagram instances for the network referred to by IscNetwork.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>network</strong> (<a class="reference internal" href="IscNetwork.html#ipsa.IscNetwork" title="ipsa.IscNetwork"><em>IscNetwork</em></a>) – The Ipsa network.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The network diagram.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)">tuple</a>(<a class="reference internal" href="IscDiagram.html#ipsa.IscDiagram" title="ipsa.IscDiagram">IscDiagram</a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.GetAllDiagramsNames">
+<span class="sig-name descname"><span class="pre">GetAllDiagramsNames</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">network</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ipsa.IscInterface.GetAllDiagramsNames" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a list of all the diagram names for the network referred to by IscNetwork.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>network</strong> (<a class="reference internal" href="IscNetwork.html#ipsa.IscNetwork" title="ipsa.IscNetwork"><em>IscNetwork</em></a>) – The Ipsa network.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of diagram names.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)">list</a>(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.GetDate">
+<span class="sig-name descname"><span class="pre">GetDate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#ipsa.IscInterface.GetDate" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the date and time that Ipsa was launched, e.g. 06 Nov 2012 22:53:17.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The date in a string format.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.GetDiagram">
+<span class="sig-name descname"><span class="pre">GetDiagram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">network</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strName</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ipsa.IscInterface.GetDiagram" title="Permalink to this definition"></a></dt>
+<dd><p>Returns an IscDiagram instance for the diagram with name strName contained in the network
+referred to by iscNetwork.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>network</strong> (<a class="reference internal" href="IscNetwork.html#ipsa.IscNetwork" title="ipsa.IscNetwork"><em>IscNetwork</em></a>) – The IscNetwork instance of the Ipsa network.</p></li>
+<li><p><strong>strName</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The name of the diagram.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The diagram of the Ipsa network.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="IscDiagram.html#ipsa.IscDiagram" title="ipsa.IscDiagram">IscDiagram</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.GetDirectoryName">
+<span class="sig-name descname"><span class="pre">GetDirectoryName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strDialogTitle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#ipsa.IscInterface.GetDirectoryName" title="Permalink to this definition"></a></dt>
+<dd><p>Display the operating system Folder Selection dialog to prompt the user to select a folder.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>strDialogTitle</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The title of the dialog itself.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>String containing the path selected by the user.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.GetFileName">
+<span class="sig-name descname"><span class="pre">GetFileName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strDialogTitle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">strFileTypes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#ipsa.IscInterface.GetFileName" title="Permalink to this definition"></a></dt>
+<dd><p>Display the operating system File Open dialog to prompt the user to select a file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>strDialogTitle</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The title of the dialog itself.</p></li>
+<li><p><strong>strFileTypes</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The file type filter.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>String containing the file name and path selected by the user.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.GetFilingErrors">
+<span class="sig-name descname"><span class="pre">GetFilingErrors</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ipsa.IscInterface.GetFilingErrors" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a list of strings detailing the failed merge operations that occurred as a result of
+the ValidatedMergeFile function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>List of failed merge operations.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)">list</a>(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.GetFilingMessages">
+<span class="sig-name descname"><span class="pre">GetFilingMessages</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ipsa.IscInterface.GetFilingMessages" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a list of strings detailing the successful merge operations that occurred as a result of
+the ValidatedMergeFile function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>List of successful merge operations.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)">list</a>(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.GetHost">
+<span class="sig-name descname"><span class="pre">GetHost</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#ipsa.IscInterface.GetHost" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the host name of the PC.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The host name of the PC.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.GetLineLength">
+<span class="sig-name descname"><span class="pre">GetLineLength</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">diagram</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pComponent</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscInterface.GetLineLength" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">GetLineLength</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">diagram</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nLineUID</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span></dt>
+<dd><p>Returns the component length as drawn on the diagram.
+When used on geographic diagrams this function returns the physical as drawn line length.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>diagram</strong> (<a class="reference internal" href="IscDiagram.html#ipsa.IscDiagram" title="ipsa.IscDiagram"><em>IscDiagram</em></a>) – IscDiagram instance obtained from the GetDiagram function.</p></li>
+<li><p><strong>pComponent</strong> (<a class="reference internal" href="IscBranch.html#ipsa.IscBranch" title="ipsa.IscBranch"><em>IscBranch</em></a>) – IscBranch instance returned by a GetBranch function.</p></li>
+<li><p><strong>nLineUID</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The unique integer for the line.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The component length.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.GetLogFileName">
+<span class="sig-name descname"><span class="pre">GetLogFileName</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#ipsa.IscInterface.GetLogFileName" title="Permalink to this definition"></a></dt>
+<dd><p>Get the name of log file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The name of the log file.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.GetMaxBusbars">
+<span class="sig-name descname"><span class="pre">GetMaxBusbars</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#ipsa.IscInterface.GetMaxBusbars" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the maximum number of busbars if it is a limited busbar version, returns 0 if unlimited.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The maximum number of busbars if in limited busbar version, else 0.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.GetNetwork">
+<span class="sig-name descname"><span class="pre">GetNetwork</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ipsa.IscInterface.GetNetwork" title="Permalink to this definition"></a></dt>
+<dd><p>Returns an IscNetwork instance for the current Ipsa network.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The IscNetwork instance of the Ipsa network.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="IscNetwork.html#ipsa.IscNetwork" title="ipsa.IscNetwork">IscNetwork</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.GetNetworkFileName">
+<span class="sig-name descname"><span class="pre">GetNetworkFileName</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#ipsa.IscInterface.GetNetworkFileName" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the filename of the current network.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The filename of the current network.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.GetNetworkTitle">
+<span class="sig-name descname"><span class="pre">GetNetworkTitle</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#ipsa.IscInterface.GetNetworkTitle" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the network title as set in network properties.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The network title.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.GetOrganisation">
+<span class="sig-name descname"><span class="pre">GetOrganisation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#ipsa.IscInterface.GetOrganisation" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the company organisation data as set in network properties.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The company organisation data.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.GetResultsTableText">
+<span class="sig-name descname"><span class="pre">GetResultsTableText</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nTableType</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#ipsa.IscInterface.GetResultsTableText" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the data contained in the results’ table as a comma delimited string
+which can be pasted directly into a spreadsheet.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>nTableType</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The type defined for the DisplayResultsTable function.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Data contained in the results’ table.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.GetUser">
+<span class="sig-name descname"><span class="pre">GetUser</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#ipsa.IscInterface.GetUser" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the name of the current logged on user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The name of the current logged on user.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.GetVersion">
+<span class="sig-name descname"><span class="pre">GetVersion</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#ipsa.IscInterface.GetVersion" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the version number of IPSA software.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The version number.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.HasAutomation">
+<span class="sig-name descname"><span class="pre">HasAutomation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#ipsa.IscInterface.HasAutomation" title="Permalink to this definition"></a></dt>
+<dd><p>Returns True if an automation analysis license is present.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Boolean denoting whether an automation analysis license is presented.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.HasDC">
+<span class="sig-name descname"><span class="pre">HasDC</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#ipsa.IscInterface.HasDC" title="Permalink to this definition"></a></dt>
+<dd><p>Returns True if a DC component license is present.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Boolean denoting whether a DC component license is presented.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.HasFaultLevel">
+<span class="sig-name descname"><span class="pre">HasFaultLevel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#ipsa.IscInterface.HasFaultLevel" title="Permalink to this definition"></a></dt>
+<dd><p>Returns True if a fault level license is present.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Boolean denoting whether a fault level license is presented.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.HasHarmonics">
+<span class="sig-name descname"><span class="pre">HasHarmonics</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#ipsa.IscInterface.HasHarmonics" title="Permalink to this definition"></a></dt>
+<dd><p>Returns True if a harmonics analysis license is present.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Boolean denoting whether a harmonics analysis license is presented.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.HasLoadFlow">
+<span class="sig-name descname"><span class="pre">HasLoadFlow</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#ipsa.IscInterface.HasLoadFlow" title="Permalink to this definition"></a></dt>
+<dd><p>Returns True if a load flow license is present.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Boolean denoting whether a load flow license is presented.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.HasNonLinDevs">
+<span class="sig-name descname"><span class="pre">HasNonLinDevs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#ipsa.IscInterface.HasNonLinDevs" title="Permalink to this definition"></a></dt>
+<dd><p>Returns True if a non-linear devices license is present.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Boolean denoting whether a non-linear devices license is presented.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.HasProtection">
+<span class="sig-name descname"><span class="pre">HasProtection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#ipsa.IscInterface.HasProtection" title="Permalink to this definition"></a></dt>
+<dd><p>Returns True if a protection analysis license is present.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Boolean denoting whether a protection analysis license is presented.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.HasStaticCon">
+<span class="sig-name descname"><span class="pre">HasStaticCon</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#ipsa.IscInterface.HasStaticCon" title="Permalink to this definition"></a></dt>
+<dd><p>Returns True if a static converter license is present.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Boolean denoting whether a static converter license is presented.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.HasTandemGen">
+<span class="sig-name descname"><span class="pre">HasTandemGen</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#ipsa.IscInterface.HasTandemGen" title="Permalink to this definition"></a></dt>
+<dd><p>Returns True if a tandem generator license is present.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Boolean denoting whether a tandem generator license is presented.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.HasTransient">
+<span class="sig-name descname"><span class="pre">HasTransient</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#ipsa.IscInterface.HasTransient" title="Permalink to this definition"></a></dt>
+<dd><p>Returns True if a transient stability license is present.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Boolean denoting whether a transient stability license is presented.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.HasUDM">
+<span class="sig-name descname"><span class="pre">HasUDM</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#ipsa.IscInterface.HasUDM" title="Permalink to this definition"></a></dt>
+<dd><p>Returns True if a UDM (User Defined Modelling) license is present.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Boolean denoting whether a UDM license is presented.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.IsLimitedSize">
+<span class="sig-name descname"><span class="pre">IsLimitedSize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#ipsa.IscInterface.IsLimitedSize" title="Permalink to this definition"></a></dt>
+<dd><p>Returns True if the current license imposes a limit on the maximum number of busbars.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Boolean denoting whether the current license imposes a limit on the maximum number of busbars.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.IsLogging">
+<span class="sig-name descname"><span class="pre">IsLogging</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#ipsa.IscInterface.IsLogging" title="Permalink to this definition"></a></dt>
+<dd><p>Checks whether a logging is in progress.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Returns True if logging is in progress.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.MergeFile">
+<span class="sig-name descname"><span class="pre">MergeFile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sMergeName</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#ipsa.IscInterface.MergeFile" title="Permalink to this definition"></a></dt>
+<dd><p>Merges the Ipsa I2F file sMergeName into the current network.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sMergeName</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The name of the file being merged.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns True if successful, False on merge failure.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.MessageBox">
+<span class="sig-name descname"><span class="pre">MessageBox</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strDialogTitle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">strMessage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#ipsa.IscInterface.MessageBox" title="Permalink to this definition"></a></dt>
+<dd><p>Display a message box with title specified by strDialogTitle and a message specified by strMessage.
+An OK button is provided for the user to dismiss the dialog.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>strDialogTitle</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The title of the message box.</p></li>
+<li><p><strong>strMessage</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The message displayed on the message box.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Boolean denoting whether a message box is created.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.PrintPDF">
+<span class="sig-name descname"><span class="pre">PrintPDF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">diagram</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strFileName</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ipsa.IscInterface.PrintPDF" title="Permalink to this definition"></a></dt>
+<dd><p>Print the IscDiagram instance to a PDF format file with name strFileName.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>diagram</strong> (<a class="reference internal" href="IscDiagram.html#ipsa.IscDiagram" title="ipsa.IscDiagram"><em>IscDiagram</em></a>) – The diagram of the Ipsa network.</p></li>
+<li><p><strong>strFileName</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The name of the pdf file.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.ReadFile">
+<span class="sig-name descname"><span class="pre">ReadFile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strName</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ipsa.IscInterface.ReadFile" title="Permalink to this definition"></a></dt>
+<dd><p>Opens an Ipsa i2f file strName and returns an IscNetwork instance for that file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>strName</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The Ipsa i2f file that is going to be opened.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The IscNetwork instance for the strName file</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="IscNetwork.html#ipsa.IscNetwork" title="ipsa.IscNetwork">IscNetwork</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.ReadIpsa1File">
+<span class="sig-name descname"><span class="pre">ReadIpsa1File</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strName</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ipsa.IscInterface.ReadIpsa1File" title="Permalink to this definition"></a></dt>
+<dd><p>Imports an Ipsa 1 (*.iif) file strName and returns an IscNetwork instance for that file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>strName</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The Ipsa i2f file that is going to be imported.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The IscNetwork instance for the strName file</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="IscNetwork.html#ipsa.IscNetwork" title="ipsa.IscNetwork">IscNetwork</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.ValidatedMergeFile">
+<span class="sig-name descname"><span class="pre">ValidatedMergeFile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sMergeName</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#ipsa.IscInterface.ValidatedMergeFile" title="Permalink to this definition"></a></dt>
+<dd><p>Performs a consistency check to determine if the Ipsa I2F file sMergeName can be merged into
+the current network. Use the GetFilingErrors() function to get details of the merge errors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sMergeName</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The name of the file being merged.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if successful, False on merge failure.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscInterface.WriteArea">
+<span class="sig-name descname"><span class="pre">WriteArea</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nAreaUID</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">strName</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#ipsa.IscInterface.WriteArea" title="Permalink to this definition"></a></dt>
+<dd><p>Saves the area group nAreaUID as a new Ipsa i2f network file with the file name strName.
+The integer nAreaUID can be obtained using the IscGroup functions.
+The file is saved in the current working directory. The file name should include the .i2f extension</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nAreaUID</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The area group UID.</p></li>
+<li><p><strong>strName</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The name of the output file containing the i2f network.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if successful.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Coding%20Requirements.html" class="btn btn-neutral float-left" title="Coding Requirements" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="IscDiagram.html" class="btn btn-neutral float-right" title="IscDiagram" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright IPSA.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

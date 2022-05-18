@@ -1,0 +1,1801 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IscBusbar &mdash; PyIPSA 1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="IscBranch" href="IscBranch.html" />
+    <link rel="prev" title="IscNetworkData" href="IscNetworkData.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> PyIPSA
+            <img src="_static/ipsa_wo_small.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                v2.10.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Changes%20from%20IPSA%202.9.0.html">Changes from IPSA 2.9.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IPSA%20and%20Python.html">Ipsa and Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Coding%20Requirements.html">Coding Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscInterface.html">IscInterface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscDiagram.html">IscDiagram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscNetwork.html">IscNetwork</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscAnalysis.html">IscAnalysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscNetComponent.html">IscNetComponent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscNetworkData.html">IscNetworkData</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">IscBusbar</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#field-values">Field Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#iscbusbar-class">IscBusbar Class</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="IscBranch.html">IscBranch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscTransformer.html">IscTransformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Isc3WTransformer.html">Isc3WTransformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscLoad.html">IscLoad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscCircuitBreaker.html">IscCircuitBreaker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscIndMachine.html">IscIndMachine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscSynMachine.html">IscSynMachine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscGridInfeed.html">IscGridInfeed</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscFilter.html">IscFilter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscHarmonic.html">IscHarmonic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscStaticVC.html">IscStaticVC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscUMachine.html">IscUMachine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscBattery.html">IscBattery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscDCMachine.html">IscDCMachine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscConverter.html">IscConverter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscMGSet.html">IscMGSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscMechSwCapacitor.html">IscMechSwCapacitor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscGroup.html">IscGroup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscPlugin.html">IscPlugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscVoltageRegulator.html">IscVoltageRegulator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscUnbalancedLine.html">IscUnbalancedLine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscUnbalancedLoad.html">IscUnbalancedLoad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscUnbalancedTransformer.html">IscUnbalancedTransformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscAnnotation.html">IscAnnotation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscProtectionDevice.html">IscProtectionDevice</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PyIPSA</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>IscBusbar</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/IscBusbar.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="iscbusbar">
+<h1>IscBusbar<a class="headerlink" href="#iscbusbar" title="Permalink to this headline"></a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">IscBusbar</span></code> class provides access to an IPSA busbar, to set and get data values and to retrieve load flow and fault level results.</p>
+<section id="field-values">
+<h2>Field Values<a class="headerlink" href="#field-values" title="Permalink to this headline"></a></h2>
+<table class="colwidths-given tight-table docutils align-default" id="id1">
+<caption><span class="caption-text"><strong>IscBusbar Field Values</strong></span><a class="headerlink" href="#id1" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 23%" />
+<col style="width: 68%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Field Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>String</p></td>
+<td><p>Name</p></td>
+<td><p>Gets the busbar name.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Float</p></td>
+<td><p>NomVoltkV</p></td>
+<td><p>Nominal bus voltage in kV</p></td>
+</tr>
+<tr class="row-even"><td><p>Integer</p></td>
+<td><p>ControlType</p></td>
+<td><p>Gets the type of busbar, e.g. slack, PV, PQ, etc.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>0 = No voltage control at bus</p></li>
+<li><p>1 = Slack busbar</p></li>
+<li><p>2 = Real power and voltage control by generator</p></li>
+<li><p>3 = No longer used</p></li>
+<li><p>4 = No longer used</p></li>
+<li><p>5 = Voltage controlled by transformer</p></li>
+<li><p>6 = No longer used</p></li>
+<li><p>7 = Multiple types of voltage control, i.e. generator and transformer</p></li>
+<li><p>8 = Voltage controlled by remote PV generator</p></li>
+<li><p>9 = Voltage controlled by local switched capacitor</p></li>
+<li><p>10 = Voltage controlled by remote switched capacitor</p></li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Float</p></td>
+<td><p>VoltPU</p></td>
+<td><p>Gets the voltage magnitude in per unit.</p></td>
+</tr>
+<tr class="row-even"><td><p>Float</p></td>
+<td><p>VoltAngleRad</p></td>
+<td><p>Gets the voltage angle in radians.</p></td>
+</tr>
+<tr class="row-odd"><td><p>String</p></td>
+<td><p>Comment</p></td>
+<td><p>Gets the comments.</p></td>
+</tr>
+<tr class="row-even"><td><p>Integer</p></td>
+<td><p>ArcBusbarConfiguration</p></td>
+<td><p>Specific busbar configuration for this bus according to the definitions penned out by IEEE-1584 standard:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>0 = Unknown</p></li>
+<li><p>1 = VCB (vertical closed box)</p></li>
+<li><p>2 = VCBB (vertical closed bolted box)</p></li>
+<li><p>3 = HCB (horizontal closed box)</p></li>
+<li><p>4 = VOA (vertical open air box)</p></li>
+<li><p>5 = HOA (horizontal open air box)</p></li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Float</p></td>
+<td><p>ArcEnclosureWidthMM</p></td>
+<td><p>Width of the busbar enclosure for the arcflash in mm.</p></td>
+</tr>
+<tr class="row-even"><td><p>Float</p></td>
+<td><p>ArcEnclosureHeightMM</p></td>
+<td><p>Height of the busbar enclosure for the arcflash in mm.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Float</p></td>
+<td><p>ArcEnclosureDepthMM</p></td>
+<td><p>Depth of the busbar enclosure for the arcflash in mm.</p></td>
+</tr>
+<tr class="row-even"><td><p>Float</p></td>
+<td><p>ArcConductorGapMM</p></td>
+<td><p>Air gap between the conductors that the arc flash jumps across in mm.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Float</p></td>
+<td><p>ArcWorkingDistanceMM</p></td>
+<td><p>Working distance for the bus container in mm.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="iscbusbar-class">
+<h2>IscBusbar Class<a class="headerlink" href="#iscbusbar-class" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ipsa.IscBusbar">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ipsa.</span></span><span class="sig-name descname"><span class="pre">IscBusbar</span></span><a class="headerlink" href="#ipsa.IscBusbar" title="Permalink to this definition"></a></dt>
+<dd><p>Provides access to an IPSA busbar.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetAnnualInterruptionFrequency">
+<span class="sig-name descname"><span class="pre">GetAnnualInterruptionFrequency</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetAnnualInterruptionFrequency" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the number of interruptions per year from the reliability study results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The number of interruptions per year from the reliability study results.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetAnnualInterruptionHours">
+<span class="sig-name descname"><span class="pre">GetAnnualInterruptionHours</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetAnnualInterruptionHours" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the total annual interruption time in hours from the reliability study results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The total annual interruption time in hours from the reliability study results.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetAverageInterruptionHours">
+<span class="sig-name descname"><span class="pre">GetAverageInterruptionHours</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetAverageInterruptionHours" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the average interruption time in hours from the reliability study results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The average interruption time in hours from the reliability study results.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetBValue">
+<span class="sig-name descname"><span class="pre">GetBValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nFieldIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetBValue" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a boolean value for the enumerated field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>nFieldIndex</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The field index.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The boolean value.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetBlueVoltageAngleDeg">
+<span class="sig-name descname"><span class="pre">GetBlueVoltageAngleDeg</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetBlueVoltageAngleDeg" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the blue phase voltage angle in degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The blue phase voltage angle in degrees.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetBlueVoltageMagnitudePU">
+<span class="sig-name descname"><span class="pre">GetBlueVoltageMagnitudePU</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetBlueVoltageMagnitudePU" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the blue phase voltage magnitude in per-unit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The blue phase voltage magnitude in per-unit.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetBlueVoltageMagnitudekV">
+<span class="sig-name descname"><span class="pre">GetBlueVoltageMagnitudekV</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetBlueVoltageMagnitudekV" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the blue phase voltage magnitude in kV.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The blue phase voltage magnitude in kV.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetDValue">
+<span class="sig-name descname"><span class="pre">GetDValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nFieldIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetDValue" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a double value for the enumerated field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>nFieldIndex</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The field index.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The double value.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFault2HComponentMVA">
+<span class="sig-name descname"><span class="pre">GetFault2HComponentMVA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFault2HComponentMVA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the second harmonic component of fault level in MVA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The second harmonic component of fault level in MVA.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFault2HComponentkA">
+<span class="sig-name descname"><span class="pre">GetFault2HComponentkA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFault2HComponentkA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the second harmonic component of fault level in kA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The second harmonic component of fault level in kA.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultACComponentMVA">
+<span class="sig-name descname"><span class="pre">GetFaultACComponentMVA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultACComponentMVA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the AC component of fault level in MVA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The AC component of fault level in MVA.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultACComponentkA">
+<span class="sig-name descname"><span class="pre">GetFaultACComponentkA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultACComponentkA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the AC component of fault level in kA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The AC component of fault level in kA.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultBlueComponentAngleDeg">
+<span class="sig-name descname"><span class="pre">GetFaultBlueComponentAngleDeg</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultBlueComponentAngleDeg" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the blue phase component of fault angle in degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The blue phase component of fault angle in degrees.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultBlueComponentMVA">
+<span class="sig-name descname"><span class="pre">GetFaultBlueComponentMVA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultBlueComponentMVA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the blue phase component of fault level in MVA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The blue phase component of fault level in MVA.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultBlueComponentkA">
+<span class="sig-name descname"><span class="pre">GetFaultBlueComponentkA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultBlueComponentkA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the blue phase component of fault level in kA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The blue phase component of fault level in kA.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultBlueVoltageAngleDeg">
+<span class="sig-name descname"><span class="pre">GetFaultBlueVoltageAngleDeg</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultBlueVoltageAngleDeg" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the blue phase fault voltage angle in degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The blue phase fault voltage angle in degrees.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultBlueVoltagePU">
+<span class="sig-name descname"><span class="pre">GetFaultBlueVoltagePU</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultBlueVoltagePU" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the blue phase fault voltage in per unit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The blue phase fault voltage in per unit.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultDCComponentMVA">
+<span class="sig-name descname"><span class="pre">GetFaultDCComponentMVA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultDCComponentMVA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the DC component of fault level in MVA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The DC component of fault level in MVA.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultDCComponentkA">
+<span class="sig-name descname"><span class="pre">GetFaultDCComponentkA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultDCComponentkA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the DC component of fault level in kA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The DC component of fault level in kA.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultDCTheveninR">
+<span class="sig-name descname"><span class="pre">GetFaultDCTheveninR</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultDCTheveninR" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the resistive component of the DC X/R ratio.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The resistive component of the DC X/R ratio.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultDCTheveninX">
+<span class="sig-name descname"><span class="pre">GetFaultDCTheveninX</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultDCTheveninX" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the inductive/capacitive component of the DC X/R ratio.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The inductive/capacitive component of the DC X/R ratio.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultDValue">
+<span class="sig-name descname"><span class="pre">GetFaultDValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nCircuitBreakerFieldIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultDValue" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a float value for the circuit breaker field.
+<strong>Note that nCircuitBreakerFieldIndex should be one of MakePeakkA, BreakRMSkA, BreakDCPC, BreakTimemS or
+NomCurrentkA – it is an IscCircuitBreaker field index.</strong>
+This function is used to get fault (breaker) ratings for a busbar.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>nCircuitBreakerFieldIndex</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – MakePeakkA, BreakRMSkA, BreakDCPC, BreakTimemS or NomCurrentkA – it is an IscCircuitBreaker field index.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The float value for the selected field.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultIEC909AsymmetricBreakMVA">
+<span class="sig-name descname"><span class="pre">GetFaultIEC909AsymmetricBreakMVA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultIEC909AsymmetricBreakMVA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the asymmetric break fault level in MVA for IEC60909 analysis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The asymmetric break fault level in MVA for IEC60909 analysis.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultIEC909AsymmetricBreakkA">
+<span class="sig-name descname"><span class="pre">GetFaultIEC909AsymmetricBreakkA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultIEC909AsymmetricBreakkA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the asymmetric break fault level in kA for IEC60909 analysis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The asymmetric break fault level in kA for IEC60909 analysis.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultIEC909DCMagnitudeMVA">
+<span class="sig-name descname"><span class="pre">GetFaultIEC909DCMagnitudeMVA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultIEC909DCMagnitudeMVA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the DC fault level magnitude in MVA for IEC60909 analysis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The DC fault level magnitude in MVA for IEC60909 analysis.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultIEC909DCMagnitudekA">
+<span class="sig-name descname"><span class="pre">GetFaultIEC909DCMagnitudekA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultIEC909DCMagnitudekA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the DC fault level magnitude in kA for IEC60909 analysis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The DC fault level magnitude in kA for IEC60909 analysis.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultIEC909DCXoverR">
+<span class="sig-name descname"><span class="pre">GetFaultIEC909DCXoverR</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultIEC909DCXoverR" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the X/R ratio for IEC60909 analysis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The X/R ratio for IEC60909 analysis.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultIEC909DCXoverRBreak">
+<span class="sig-name descname"><span class="pre">GetFaultIEC909DCXoverRBreak</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultIEC909DCXoverRBreak" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the X/R ratio at break time for IEC60909 analysis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The X/R ratio at break time for IEC60909 analysis.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultIEC909InitialSymRMSMVA">
+<span class="sig-name descname"><span class="pre">GetFaultIEC909InitialSymRMSMVA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultIEC909InitialSymRMSMVA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the initial symmetrical RMS fault level in MVA for IEC60909 analysis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The initial symmetrical RMS fault level in MVA for IEC60909 analysis.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultIEC909InitialSymRMSkA">
+<span class="sig-name descname"><span class="pre">GetFaultIEC909InitialSymRMSkA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultIEC909InitialSymRMSkA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the initial symmetrical RMS fault level in kA for IEC60909 analysis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The initial symmetrical RMS fault level in kA for IEC60909 analysis.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultIEC909PeakMVA">
+<span class="sig-name descname"><span class="pre">GetFaultIEC909PeakMVA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultIEC909PeakMVA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the peak fault level in MVA for IEC60909 analysis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The peak fault level in MVA for IEC60909 analysis.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultIEC909PeakkA">
+<span class="sig-name descname"><span class="pre">GetFaultIEC909PeakkA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultIEC909PeakkA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the peak fault level in kA for IEC60909 analysis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The peak fault level in kA for IEC60909 analysis.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultIEC909SteadyStateMVA">
+<span class="sig-name descname"><span class="pre">GetFaultIEC909SteadyStateMVA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultIEC909SteadyStateMVA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the steady state fault level in MVA for IEC60909 analysis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The steady state fault level in MVA for IEC60909 analysis.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultIEC909SteadyStatekA">
+<span class="sig-name descname"><span class="pre">GetFaultIEC909SteadyStatekA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultIEC909SteadyStatekA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the steady state fault level in kA for IEC60909 analysis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The steady state fault level in kA for IEC60909 analysis.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultIEC909SymmetricBreakMVA">
+<span class="sig-name descname"><span class="pre">GetFaultIEC909SymmetricBreakMVA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultIEC909SymmetricBreakMVA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the symmetric break fault level in MVA for IEC60909 analysis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The symmetric break fault level in MVA for IEC60909 analysis.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultIEC909SymmetricBreakkA">
+<span class="sig-name descname"><span class="pre">GetFaultIEC909SymmetricBreakkA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultIEC909SymmetricBreakkA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the symmetric break fault level in kA for IEC60909 analysis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The symmetric break fault level in kA for IEC60909 analysis.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultNegativeComponentAngleDeg">
+<span class="sig-name descname"><span class="pre">GetFaultNegativeComponentAngleDeg</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultNegativeComponentAngleDeg" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the negative sequence component of fault angle in degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The negative sequence component of fault angle in degrees.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultNegativeComponentMVA">
+<span class="sig-name descname"><span class="pre">GetFaultNegativeComponentMVA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultNegativeComponentMVA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the negative sequence component of fault level in MVA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The negative sequence component of fault level in MVA.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultNegativeComponentkA">
+<span class="sig-name descname"><span class="pre">GetFaultNegativeComponentkA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultNegativeComponentkA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the negative sequence component of fault level in kA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The negative sequence component of fault level in kA.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultNegativeVoltageAngleDeg">
+<span class="sig-name descname"><span class="pre">GetFaultNegativeVoltageAngleDeg</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultNegativeVoltageAngleDeg" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the negative sequence component of fault voltage angle in degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The negative sequence component of fault voltage angle in degrees.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultNegativeVoltagePU">
+<span class="sig-name descname"><span class="pre">GetFaultNegativeVoltagePU</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultNegativeVoltagePU" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the negative sequence component of fault voltage in per unit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The negative sequence component of fault voltage in per unit.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultPositiveComponentAngleDeg">
+<span class="sig-name descname"><span class="pre">GetFaultPositiveComponentAngleDeg</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultPositiveComponentAngleDeg" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the positive sequence component of fault angle in degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The positive sequence component of fault angle in degrees.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultPositiveComponentMVA">
+<span class="sig-name descname"><span class="pre">GetFaultPositiveComponentMVA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultPositiveComponentMVA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the positive sequence component of fault level in MVA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The positive sequence component of fault level in MVA.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultPositiveComponentkA">
+<span class="sig-name descname"><span class="pre">GetFaultPositiveComponentkA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultPositiveComponentkA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the positive sequence component of fault level in kA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The positive sequence component of fault level in kA.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultPositiveVoltageAngleDeg">
+<span class="sig-name descname"><span class="pre">GetFaultPositiveVoltageAngleDeg</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultPositiveVoltageAngleDeg" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the positive sequence component of fault voltage angle in degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The positive sequence component of fault voltage angle in degrees.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultPositiveVoltagePU">
+<span class="sig-name descname"><span class="pre">GetFaultPositiveVoltagePU</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultPositiveVoltagePU" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the positive sequence component of fault voltage in per unit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The positive sequence component of fault voltage in per unit.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultRedComponentAngleDeg">
+<span class="sig-name descname"><span class="pre">GetFaultRedComponentAngleDeg</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultRedComponentAngleDeg" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the red phase component of fault angle in degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The red phase component of fault angle in degrees.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultRedComponentMVA">
+<span class="sig-name descname"><span class="pre">GetFaultRedComponentMVA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultRedComponentMVA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the red phase component of fault level in MVA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The red phase component of fault level in MVA.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultRedComponentkA">
+<span class="sig-name descname"><span class="pre">GetFaultRedComponentkA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultRedComponentkA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the red phase component of fault level in kA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The red phase component of fault level in kA.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultRedVoltageAngleDeg">
+<span class="sig-name descname"><span class="pre">GetFaultRedVoltageAngleDeg</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultRedVoltageAngleDeg" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the red phase fault voltage angle in degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The red phase fault voltage angle in degrees.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultRedVoltagePU">
+<span class="sig-name descname"><span class="pre">GetFaultRedVoltagePU</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultRedVoltagePU" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the red phase fault voltage in per unit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The red phase fault voltage in per unit.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultYellowComponentAngleDeg">
+<span class="sig-name descname"><span class="pre">GetFaultYellowComponentAngleDeg</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultYellowComponentAngleDeg" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the yellow phase component of fault angle in degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The yellow phase component of fault angle in degrees.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultYellowComponentMVA">
+<span class="sig-name descname"><span class="pre">GetFaultYellowComponentMVA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultYellowComponentMVA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the yellow phase component of fault level in MVA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The yellow phase component of fault level in MVA.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultYellowComponentkA">
+<span class="sig-name descname"><span class="pre">GetFaultYellowComponentkA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultYellowComponentkA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the yellow phase component of fault level in kA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The yellow phase component of fault level in kA.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultYellowVoltageAngleDeg">
+<span class="sig-name descname"><span class="pre">GetFaultYellowVoltageAngleDeg</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultYellowVoltageAngleDeg" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the yellow phase fault voltage angle in degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The yellow phase fault voltage angle in degrees.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultYellowVoltagePU">
+<span class="sig-name descname"><span class="pre">GetFaultYellowVoltagePU</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultYellowVoltagePU" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the yellow phase fault voltage in per unit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The yellow phase fault voltage in per unit.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultZeroComponentAngleDeg">
+<span class="sig-name descname"><span class="pre">GetFaultZeroComponentAngleDeg</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultZeroComponentAngleDeg" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the zero sequence component of fault angle in degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The zero sequence component of fault angle in degrees.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultZeroComponentMVA">
+<span class="sig-name descname"><span class="pre">GetFaultZeroComponentMVA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultZeroComponentMVA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the zero sequence component of fault level in MVA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The zero sequence component of fault level in MVA.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultZeroComponentkA">
+<span class="sig-name descname"><span class="pre">GetFaultZeroComponentkA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultZeroComponentkA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the zero sequence component of fault level in kA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The zero sequence component of fault level in kA.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultZeroVoltageAngleDeg">
+<span class="sig-name descname"><span class="pre">GetFaultZeroVoltageAngleDeg</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultZeroVoltageAngleDeg" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the zero sequence component of fault voltage angle in degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The zero sequence component of fault voltage angle in degrees.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetFaultZeroVoltagePU">
+<span class="sig-name descname"><span class="pre">GetFaultZeroVoltagePU</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetFaultZeroVoltagePU" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the zero sequence component of fault voltage in per unit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The zero sequence component of fault voltage in per unit.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetHarmonicDistortion">
+<span class="sig-name descname"><span class="pre">GetHarmonicDistortion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dOrder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetHarmonicDistortion" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the harmonic distortion at a busbar in percent for order.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dOrder</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – The harmonic order.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The harmonic distortion at a busbar in percent.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetIValue">
+<span class="sig-name descname"><span class="pre">GetIValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nFieldIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetIValue" title="Permalink to this definition"></a></dt>
+<dd><p>Returns an integer value for the enumerated field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>nFieldIndex</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The field index.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The integer value.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetImpedanceAngle">
+<span class="sig-name descname"><span class="pre">GetImpedanceAngle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dOrder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetImpedanceAngle" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the harmonic impedance angle in radians for harmonic order.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dOrder</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – The harmonic order.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The harmonic impedance angle in radians.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetImpedanceImaginary">
+<span class="sig-name descname"><span class="pre">GetImpedanceImaginary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dOrder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetImpedanceImaginary" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the imaginary part of the harmonic impedance in per unit for harmonic order.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dOrder</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – The harmonic order.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The imaginary part of the harmonic impedance in per unit.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetImpedanceMagnitude">
+<span class="sig-name descname"><span class="pre">GetImpedanceMagnitude</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dOrder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetImpedanceMagnitude" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the harmonic impedance magnitude in per unit for harmonic order.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dOrder</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – The harmonic order.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The harmonic impedance magnitude in per unit.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetImpedanceOrders">
+<span class="sig-name descname"><span class="pre">GetImpedanceOrders</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetImpedanceOrders" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a list of all harmonic impedance orders at a busbar.
+These harmonic orders can then be used to access busbar results at a specific harmonic order.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>All harmonic impedance orders at a busbar.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)">list</a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetImpedanceReal">
+<span class="sig-name descname"><span class="pre">GetImpedanceReal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dOrder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetImpedanceReal" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the real part of the harmonic impedance in per unit for harmonic order.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dOrder</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – The harmonic order.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The real part of the harmonic impedance in per unit.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetMaximumDistortion">
+<span class="sig-name descname"><span class="pre">GetMaximumDistortion</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetMaximumDistortion" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a list of reals for harmonic order with the highest distortion. The distortion is in percent.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A list of reals for harmonic order with the highest distortion.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)">list</a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetMaximumProfileIndex">
+<span class="sig-name descname"><span class="pre">GetMaximumProfileIndex</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetMaximumProfileIndex" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the category index which identifies the maximum busbar voltage result from the profile study results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The maximum category index.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetMinimumProfileIndex">
+<span class="sig-name descname"><span class="pre">GetMinimumProfileIndex</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetMinimumProfileIndex" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the category index which identifies the minimum busbar voltage result from the profile study results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The minimum category index.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetProfileMaximumVoltagePU">
+<span class="sig-name descname"><span class="pre">GetProfileMaximumVoltagePU</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetProfileMaximumVoltagePU" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the maximum voltage in per unit from the profile study results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The maximum voltage in per unit from the profile study results.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetProfileMedianVoltagePU">
+<span class="sig-name descname"><span class="pre">GetProfileMedianVoltagePU</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetProfileMedianVoltagePU" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the median of the voltage in per unit from the profile study results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The median of the voltage in per unit from the profile study results.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetProfileMinimumVoltagePU">
+<span class="sig-name descname"><span class="pre">GetProfileMinimumVoltagePU</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetProfileMinimumVoltagePU" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the minimum voltage in per unit from the profile study results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The minimum voltage in per unit from the profile study results.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetReactiveGenerationMVAr">
+<span class="sig-name descname"><span class="pre">GetReactiveGenerationMVAr</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetReactiveGenerationMVAr" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the total MVAr of generation at a busbar.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The total MVAr of generation at a busbar.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetReactiveInductionMVAr">
+<span class="sig-name descname"><span class="pre">GetReactiveInductionMVAr</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetReactiveInductionMVAr" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the total MVAr of induction machines at a busbar.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The total MVAr of induction machines at a busbar.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetReactiveLoadMVAr">
+<span class="sig-name descname"><span class="pre">GetReactiveLoadMVAr</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetReactiveLoadMVAr" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the total MVAr of static load at a busbar.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The total MVAr of static load at a busbar.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetReactiveMismatchMVAr">
+<span class="sig-name descname"><span class="pre">GetReactiveMismatchMVAr</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetReactiveMismatchMVAr" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the load flow MVAr mismatch.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The load flow MVAr mismatch.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetRealGenerationMW">
+<span class="sig-name descname"><span class="pre">GetRealGenerationMW</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetRealGenerationMW" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the total MW of generation at a busbar.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The total MW of generation at a busbar.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetRealInductionMW">
+<span class="sig-name descname"><span class="pre">GetRealInductionMW</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetRealInductionMW" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the total MW of induction machines at a busbar.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The total MW of induction machines at a busbar.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetRealLoadMW">
+<span class="sig-name descname"><span class="pre">GetRealLoadMW</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetRealLoadMW" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the total MW of static load at a busbar.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The total MW of static load at a busbar.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetRealMismatchMW">
+<span class="sig-name descname"><span class="pre">GetRealMismatchMW</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetRealMismatchMW" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the load flow MW mismatch.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The load flow MW mismatch.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetRedVoltageAngleDeg">
+<span class="sig-name descname"><span class="pre">GetRedVoltageAngleDeg</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetRedVoltageAngleDeg" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the red phase voltage angle in degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The red phase voltage angle in degrees.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetRedVoltageMagnitudePU">
+<span class="sig-name descname"><span class="pre">GetRedVoltageMagnitudePU</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetRedVoltageMagnitudePU" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the red phase voltage magnitude in per-unit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The red phase voltage magnitude in per-unit.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetRedVoltageMagnitudekV">
+<span class="sig-name descname"><span class="pre">GetRedVoltageMagnitudekV</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetRedVoltageMagnitudekV" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the red phase voltage magnitude in kV.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The red phase voltage magnitude in kV.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetResonances">
+<span class="sig-name descname"><span class="pre">GetResonances</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetResonances" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a list containing all the resonances found at a busbar.
+Each list gives the lower and upper resonance orders for each resonance found.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A list containing all the resonances found at a busbar.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)">list</a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetSValue">
+<span class="sig-name descname"><span class="pre">GetSValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nFieldIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetSValue" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a string value for the enumerated field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>nFieldIndex</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The field index.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The string value.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetTotalHarmonicDistortion">
+<span class="sig-name descname"><span class="pre">GetTotalHarmonicDistortion</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetTotalHarmonicDistortion" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the total harmonic distortion at a busbar in percent.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The total harmonic distortion at a busbar in percent.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetVoltageAngle">
+<span class="sig-name descname"><span class="pre">GetVoltageAngle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dOrder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetVoltageAngle" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the harmonic voltage angle in radians for harmonic order.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dOrder</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – The harmonic order.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The harmonic voltage angle in radians.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetVoltageAngleDeg">
+<span class="sig-name descname"><span class="pre">GetVoltageAngleDeg</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetVoltageAngleDeg" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the voltage angle in degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The voltage angle.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetVoltageAngleRad">
+<span class="sig-name descname"><span class="pre">GetVoltageAngleRad</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetVoltageAngleRad" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the voltage angle in radians.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The voltage angle.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetVoltageMagnitudePC">
+<span class="sig-name descname"><span class="pre">GetVoltageMagnitudePC</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dOrder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetVoltageMagnitudePC" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the harmonic voltage magnitude in percent for harmonic order.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dOrder</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – The harmonic order.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The harmonic voltage magnitude in percent.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetVoltageMagnitudePU">
+<span class="sig-name descname"><span class="pre">GetVoltageMagnitudePU</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dOrder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetVoltageMagnitudePU" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the harmonic voltage magnitude in per unit for harmonic order.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dOrder</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – The harmonic order.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The harmonic voltage magnitude in per unit.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetVoltageMagnitudekV">
+<span class="sig-name descname"><span class="pre">GetVoltageMagnitudekV</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetVoltageMagnitudekV" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the voltage magnitude in kV.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The voltage magnitude.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetVoltageOrders">
+<span class="sig-name descname"><span class="pre">GetVoltageOrders</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetVoltageOrders" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a list of all harmonic orders at a busbar.
+These harmonic orders can then be used to access busbar results at a specific harmonic order.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>All harmonic orders at a busbar.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)">list</a>(<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetVoltageSum">
+<span class="sig-name descname"><span class="pre">GetVoltageSum</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetVoltageSum" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the arithmetic sum of all harmonic voltages at a busbar in per unit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The arithmetic sum of all harmonic voltages at a busbar in per unit.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetYellowVoltageAngleDeg">
+<span class="sig-name descname"><span class="pre">GetYellowVoltageAngleDeg</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetYellowVoltageAngleDeg" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the yellow phase voltage angle in degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The yellow phase voltage angle in degrees.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetYellowVoltageMagnitudePU">
+<span class="sig-name descname"><span class="pre">GetYellowVoltageMagnitudePU</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetYellowVoltageMagnitudePU" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the yellow phase voltage magnitude in per-unit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The yellow phase voltage magnitude in per-unit.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.GetYellowVoltageMagnitudekV">
+<span class="sig-name descname"><span class="pre">GetYellowVoltageMagnitudekV</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.GetYellowVoltageMagnitudekV" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the yellow phase voltage magnitude in kV.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The yellow phase voltage magnitude in kV.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.SetBValue">
+<span class="sig-name descname"><span class="pre">SetBValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nFieldIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">bValue</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.SetBValue" title="Permalink to this definition"></a></dt>
+<dd><p>Sets the value for the enumerated field from boolean.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nFieldIndex</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The field index.</p></li>
+<li><p><strong>bValue</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – The given boolean value.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if successful.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.SetDValue">
+<span class="sig-name descname"><span class="pre">SetDValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nFieldIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">dValue</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.SetDValue" title="Permalink to this definition"></a></dt>
+<dd><p>Sets the value for the enumerated field from a double.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nFieldIndex</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The field index.</p></li>
+<li><p><strong>dValue</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – The given double value.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if successful.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.SetFaultDValue">
+<span class="sig-name descname"><span class="pre">SetFaultDValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nCircuitBreakerFieldIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.SetFaultDValue" title="Permalink to this definition"></a></dt>
+<dd><p>Sets the value for the circuit breaker field.
+<strong>Note that nCircuitBreakerFieldIndex should be one of MakePeakkA, BreakRMSkA, BreakDCPC, BreakTimemS or
+NomCurrentkA – it is an IscCircuitBreaker field index.</strong>
+This function is used to set fault (breaker) ratings for a busbar.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>nCircuitBreakerFieldIndex</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – MakePeakkA, BreakRMSkA, BreakDCPC, BreakTimemS or NomCurrentkA – it is an IscCircuitBreaker field index.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if successful.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.SetIValue">
+<span class="sig-name descname"><span class="pre">SetIValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nFieldIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">nValue</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.SetIValue" title="Permalink to this definition"></a></dt>
+<dd><p>Sets the value for the enumerated field from an integer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nFieldIndex</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The field index.</p></li>
+<li><p><strong>nValue</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The given integer value.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if successful.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.SetName">
+<span class="sig-name descname"><span class="pre">SetName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strName</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.SetName" title="Permalink to this definition"></a></dt>
+<dd><p>Sets the name as a string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>strName</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The selected string name.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if successful.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBusbar.SetSValue">
+<span class="sig-name descname"><span class="pre">SetSValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nFieldIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">strValue</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#ipsa.IscBusbar.SetSValue" title="Permalink to this definition"></a></dt>
+<dd><p>Sets the value for the enumerated field from a string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nFieldIndex</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The field index.</p></li>
+<li><p><strong>strValue</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The given string value.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if successful.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="IscNetworkData.html" class="btn btn-neutral float-left" title="IscNetworkData" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="IscBranch.html" class="btn btn-neutral float-right" title="IscBranch" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright IPSA.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

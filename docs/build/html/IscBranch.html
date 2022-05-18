@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IscBranch &mdash; PyIPSA 1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="IscTransformer" href="IscTransformer.html" />
+    <link rel="prev" title="IscBusbar" href="IscBusbar.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> PyIPSA
+            <img src="_static/ipsa_wo_small.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                v2.10.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Changes%20from%20IPSA%202.9.0.html">Changes from IPSA 2.9.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IPSA%20and%20Python.html">Ipsa and Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Coding%20Requirements.html">Coding Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscInterface.html">IscInterface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscDiagram.html">IscDiagram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscNetwork.html">IscNetwork</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscAnalysis.html">IscAnalysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscNetComponent.html">IscNetComponent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscNetworkData.html">IscNetworkData</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscBusbar.html">IscBusbar</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">IscBranch</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#field-values">Field Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#iscbranch-class">IscBranch Class</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="IscTransformer.html">IscTransformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Isc3WTransformer.html">Isc3WTransformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscLoad.html">IscLoad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscCircuitBreaker.html">IscCircuitBreaker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscIndMachine.html">IscIndMachine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscSynMachine.html">IscSynMachine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscGridInfeed.html">IscGridInfeed</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscFilter.html">IscFilter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscHarmonic.html">IscHarmonic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscStaticVC.html">IscStaticVC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscUMachine.html">IscUMachine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscBattery.html">IscBattery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscDCMachine.html">IscDCMachine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscConverter.html">IscConverter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscMGSet.html">IscMGSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscMechSwCapacitor.html">IscMechSwCapacitor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscGroup.html">IscGroup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscPlugin.html">IscPlugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscVoltageRegulator.html">IscVoltageRegulator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscUnbalancedLine.html">IscUnbalancedLine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscUnbalancedLoad.html">IscUnbalancedLoad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscUnbalancedTransformer.html">IscUnbalancedTransformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscAnnotation.html">IscAnnotation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscProtectionDevice.html">IscProtectionDevice</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PyIPSA</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>IscBranch</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/IscBranch.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="iscbranch">
+<h1>IscBranch<a class="headerlink" href="#iscbranch" title="Permalink to this headline"></a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">IscBranch</span></code> class provides access to an IPSA branch, to set and get data values and to retrieve analysis results.</p>
+<p><strong>Note that the branch rating sets are defined in the</strong> <code class="docutils literal notranslate"><span class="pre">IscNetwork</span></code> <strong>class.</strong></p>
+<section id="field-values">
+<h2>Field Values<a class="headerlink" href="#field-values" title="Permalink to this headline"></a></h2>
+<table class="colwidths-given tight-table docutils align-default" id="id1">
+<caption><span class="caption-text"><strong>IscBranch Field Values</strong></span><a class="headerlink" href="#id1" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 23%" />
+<col style="width: 68%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Field Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Integer</p></td>
+<td><p>FromUID</p></td>
+<td><p>Gets the unique component ID for the “From” busbar.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Integer</p></td>
+<td><p>ToUID</p></td>
+<td><p>Gets the unique component ID for the “To” busbar.</p></td>
+</tr>
+<tr class="row-even"><td><p>String</p></td>
+<td><p>FromBusName</p></td>
+<td><p>Gets the sending busbar name.</p></td>
+</tr>
+<tr class="row-odd"><td><p>String</p></td>
+<td><p>ToBusName</p></td>
+<td><p>Gets the receiving busbar name.</p></td>
+</tr>
+<tr class="row-even"><td><p>String</p></td>
+<td><p>Name</p></td>
+<td><p>Gets the branch name.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Boolean</p></td>
+<td><p>HideLabel</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the branch label (usually the name and any results) should be hidden on the diagram.</p></td>
+</tr>
+<tr class="row-even"><td><p>Integer</p></td>
+<td><p>Type</p></td>
+<td><p>Gets the branch/line type as defined below.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>0 = Unset</p></li>
+<li><p>1 = Overhead lines</p></li>
+<li><p>2 = Cable</p></li>
+<li><p>3 = Ducted</p></li>
+<li><p>4 = Mixed</p></li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Integer</p></td>
+<td><p>Status</p></td>
+<td><p>Line status as defined below:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>0 = Switched in.</p></li>
+<li><p>1 = Switched in, sending end will be opened in transient stability.</p></li>
+<li><p>2 = Switched in, receiving end will be opened in transient stability.</p></li>
+<li><p>3 = Switched in, both ends will be opened in transient stability.</p></li>
+<li><p>-1 = Switched out, sending end will be closed in transient stability.</p></li>
+<li><p>-2 = Switched out, receiving end will be closed in transient stability.</p></li>
+<li><p>-3 = Switched out, both ends will be closed in transient stability.</p></li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td><p>Float</p></td>
+<td><p>ResistancePU</p></td>
+<td><p>Positive sequence resistance.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Float</p></td>
+<td><p>MinResistancePU</p></td>
+<td><p>Positive sequence minimum resistance.</p></td>
+</tr>
+<tr class="row-even"><td><p>Float</p></td>
+<td><p>ReactancePU</p></td>
+<td><p>Positive sequence reactance.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Float</p></td>
+<td><p>SusceptancePU</p></td>
+<td><p>Positive sequence susceptance.</p></td>
+</tr>
+<tr class="row-even"><td><p>Float</p></td>
+<td><p>ZSResistancePU</p></td>
+<td><p>Zero sequence resistance.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Float</p></td>
+<td><p>ZSReactancePU</p></td>
+<td><p>Zero sequence reactance.</p></td>
+</tr>
+<tr class="row-even"><td><p>Boolean</p></td>
+<td><p>ZeroImpedance</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if treated as a zero impedance line.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Boolean</p></td>
+<td><p>ZeroSequence</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if treated as a zero sequence only line.</p></td>
+</tr>
+<tr class="row-even"><td><p>Float</p></td>
+<td><p>SwitchTime1Sec</p></td>
+<td><p>Line switching time 1.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Float</p></td>
+<td><p>SwitchTime2Sec</p></td>
+<td><p>Line switching time 2.</p></td>
+</tr>
+<tr class="row-even"><td><p>Float</p></td>
+<td><p>HarmRC0
+HarmRC12
+HarmRC1
+HarmRC2
+HarmRC3</p></td>
+<td><p>Harmonic polynomial constants RC0, RC12, RC1, RC2 and RC3 in:</p>
+<p><span class="math notranslate nohighlight">\(R_{h} = R[RC0 + RC12.h^{0.5} 0 + RC1.h + RC2.h^2 + RC3.h^3]\)</span></p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Float</p></td>
+<td><p>HarmXC0
+HarmXC1
+HarmXC2
+HarmXC3
+HarmXCEX
+HarmXEX</p></td>
+<td><p>Harmonic polynomial constants XC0, XC1, XC2, XC3, XCEX and XEX in:</p>
+<p><span class="math notranslate nohighlight">\(X{h} = X[XC0 + XC1.h + XC2.h^2 + XC3.h^3] + XCEX.X.h^{XEX}\)</span></p>
+</td>
+</tr>
+<tr class="row-even"><td><p>Float</p></td>
+<td><p>FailureRateYr</p></td>
+<td><p>Branch failure rate per annum.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Float</p></td>
+<td><p>RepairTimeHr</p></td>
+<td><p>Branch repair time in hours.</p></td>
+</tr>
+<tr class="row-even"><td><p>String</p></td>
+<td><p>DbType1</p></td>
+<td><p>Branch database type. For representing the cable at the From end of the transformer.</p></td>
+</tr>
+<tr class="row-odd"><td><p>String</p></td>
+<td><p>DbType2</p></td>
+<td><p>Second cable database type representing the cable at the To end of the transformer.</p></td>
+</tr>
+<tr class="row-even"><td><p>Float</p></td>
+<td><p>DbLength1</p></td>
+<td><p>First cable database length.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Float</p></td>
+<td><p>DbLength2</p></td>
+<td><p>Second cable database length (for transformers only).</p></td>
+</tr>
+<tr class="row-even"><td><p>Integer</p></td>
+<td><p>DbPar1</p></td>
+<td><p>Gets the number of lines of database type 1 in parallel.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Integer</p></td>
+<td><p>DbPar2</p></td>
+<td><p>Gets the number of lines of database type 2 in parallel.</p></td>
+</tr>
+<tr class="row-even"><td><p>String</p></td>
+<td><p>DbTranType</p></td>
+<td><p>Gets the transformer database type (only for transformers).</p></td>
+</tr>
+<tr class="row-odd"><td><p>Integer</p></td>
+<td><p>DbTranPar</p></td>
+<td><p>Gets the number of transformers in parallel (database only and only for transformers).</p></td>
+</tr>
+<tr class="row-even"><td><p>String</p></td>
+<td><p>UdmID</p></td>
+<td><p>Gets the UDM ID.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Integer</p></td>
+<td><p>UdmDevEnd</p></td>
+<td><p>Gets the device end.</p></td>
+</tr>
+<tr class="row-even"><td><p>Integer</p></td>
+<td><p>UdmCtrlType</p></td>
+<td><p>Gets the UDM type.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Integer</p></td>
+<td><p>UdmCtrlUID</p></td>
+<td><p>Gets the UDM control ID.</p></td>
+</tr>
+<tr class="row-even"><td><p>String</p></td>
+<td><p>PluginID</p></td>
+<td><p>Plugin Name, empty string means no plugin is assigned.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="iscbranch-class">
+<h2>IscBranch Class<a class="headerlink" href="#iscbranch-class" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ipsa.IscBranch">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ipsa.</span></span><span class="sig-name descname"><span class="pre">IscBranch</span></span><a class="headerlink" href="#ipsa.IscBranch" title="Permalink to this definition"></a></dt>
+<dd><p>Provides access to the IPSA branch.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.AddSections">
+<span class="sig-name descname"><span class="pre">AddSections</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nSections</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.AddSections" title="Permalink to this definition"></a></dt>
+<dd><p>Add sections to the branch. All branches start with one section.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>nSections</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of sections.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetBValue">
+<span class="sig-name descname"><span class="pre">GetBValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nFieldIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetBValue" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">GetBValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nSection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">nFieldIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span></dt>
+<dd><p>Returns a boolean value for the enumerated field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nSection</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of sections.</p></li>
+<li><p><strong>nFieldIndex</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The field index.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The boolean value.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetCurrentAngle">
+<span class="sig-name descname"><span class="pre">GetCurrentAngle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dOrder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetCurrentAngle" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the current angle in radians for the harmonic order.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dOrder</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – The harmonic order.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The current angle in radians.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetCurrentMagnitude">
+<span class="sig-name descname"><span class="pre">GetCurrentMagnitude</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dOrder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetCurrentMagnitude" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the current magnitude in per unit on the network base for the harmonic order.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dOrder</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – The harmonic order.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The current magnitude in per unit.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetDValue">
+<span class="sig-name descname"><span class="pre">GetDValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nFieldIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetDValue" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">GetDValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nSection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">nFieldIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span></dt>
+<dd><p>Returns a double value for the enumerated field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nSection</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of sections.</p></li>
+<li><p><strong>nFieldIndex</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The field index.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The double value.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetFaultBlueComponentAngleDeg">
+<span class="sig-name descname"><span class="pre">GetFaultBlueComponentAngleDeg</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetFaultBlueComponentAngleDeg" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the blue phase component of fault angle in degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The blue phase component of fault angle in degrees.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetFaultBlueComponentMVA">
+<span class="sig-name descname"><span class="pre">GetFaultBlueComponentMVA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetFaultBlueComponentMVA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the blue phase fault level component in MVA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The blue phase fault level component in MVA.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetFaultBlueComponentkA">
+<span class="sig-name descname"><span class="pre">GetFaultBlueComponentkA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetFaultBlueComponentkA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the blue phase component of fault current in kA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The blue phase component of fault current in kA.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetFaultNegativeComponentAngleDeg">
+<span class="sig-name descname"><span class="pre">GetFaultNegativeComponentAngleDeg</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetFaultNegativeComponentAngleDeg" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the negative sequence component of fault angle in degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The negative sequence component of fault angle in degrees.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetFaultNegativeComponentMVA">
+<span class="sig-name descname"><span class="pre">GetFaultNegativeComponentMVA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetFaultNegativeComponentMVA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the negative sequence fault level component in MVA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The negative sequence fault level component in MVA.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetFaultNegativeComponentkA">
+<span class="sig-name descname"><span class="pre">GetFaultNegativeComponentkA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetFaultNegativeComponentkA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the negative sequence component of fault current in kA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The negative sequence component of fault current in kA.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetFaultPositiveComponentAngleDeg">
+<span class="sig-name descname"><span class="pre">GetFaultPositiveComponentAngleDeg</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetFaultPositiveComponentAngleDeg" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the positive sequence component of fault angle in degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The positive sequence component of fault angle in degrees.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetFaultPositiveComponentMVA">
+<span class="sig-name descname"><span class="pre">GetFaultPositiveComponentMVA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetFaultPositiveComponentMVA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the positive sequence fault level component in MVA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The positive sequence fault level component in MVA.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetFaultPositiveComponentkA">
+<span class="sig-name descname"><span class="pre">GetFaultPositiveComponentkA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetFaultPositiveComponentkA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the positive sequence component of fault current in kA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The positive sequence component of fault current in kA.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetFaultRedComponentAngleDeg">
+<span class="sig-name descname"><span class="pre">GetFaultRedComponentAngleDeg</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetFaultRedComponentAngleDeg" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the red phase component of fault angle in degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The red phase component of fault angle in degrees.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetFaultRedComponentMVA">
+<span class="sig-name descname"><span class="pre">GetFaultRedComponentMVA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetFaultRedComponentMVA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the red phase level component in MVA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The red phase level component in MVA.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetFaultRedComponentkA">
+<span class="sig-name descname"><span class="pre">GetFaultRedComponentkA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetFaultRedComponentkA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the red phase component of fault current in kA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The red phase component of fault current in kA.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetFaultYellowComponentAngleDeg">
+<span class="sig-name descname"><span class="pre">GetFaultYellowComponentAngleDeg</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetFaultYellowComponentAngleDeg" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the yellow phase component of fault angle in degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The yellow phase component of fault angle in degrees.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetFaultYellowComponentMVA">
+<span class="sig-name descname"><span class="pre">GetFaultYellowComponentMVA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetFaultYellowComponentMVA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the yellow phase fault level component in MVA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The yellow phase fault level component in MVA.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetFaultYellowComponentkA">
+<span class="sig-name descname"><span class="pre">GetFaultYellowComponentkA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetFaultYellowComponentkA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the yellow phase component of fault current in kA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The yellow phase component of fault current in kA.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetFaultZeroComponentAngleDeg">
+<span class="sig-name descname"><span class="pre">GetFaultZeroComponentAngleDeg</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetFaultZeroComponentAngleDeg" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the zero sequence component of fault angle in degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The zero sequence component of fault angle in degrees.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetFaultZeroComponentMVA">
+<span class="sig-name descname"><span class="pre">GetFaultZeroComponentMVA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetFaultZeroComponentMVA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the zero sequence fault level component in MVA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The zero sequence fault level component in MVA.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetFaultZeroComponentkA">
+<span class="sig-name descname"><span class="pre">GetFaultZeroComponentkA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetFaultZeroComponentkA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the zero sequence component of fault current in kA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The zero sequence component of fault current in kA.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetIValue">
+<span class="sig-name descname"><span class="pre">GetIValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nFieldIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetIValue" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">GetIValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nSection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">nFieldIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span></dt>
+<dd><p>Returns an integer value for the enumerated field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nSection</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of sections.</p></li>
+<li><p><strong>nFieldIndex</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The field index.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The integer value.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetLargestPowerMagnitudeMVA">
+<span class="sig-name descname"><span class="pre">GetLargestPowerMagnitudeMVA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetLargestPowerMagnitudeMVA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the highest branch power in MVA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The highest branch power in MVA.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetLargestPowerMagnitudekVA">
+<span class="sig-name descname"><span class="pre">GetLargestPowerMagnitudekVA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetLargestPowerMagnitudekVA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the highest branch power in kVA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The highest branch power in kVA.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetLargestReactivePowerMVAr">
+<span class="sig-name descname"><span class="pre">GetLargestReactivePowerMVAr</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetLargestReactivePowerMVAr" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the highest branch power in MVAr.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The highest branch power in MVAr.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetLargestReactivePowerkVAr">
+<span class="sig-name descname"><span class="pre">GetLargestReactivePowerkVAr</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetLargestReactivePowerkVAr" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the highest branch power in kVAr.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The highest branch power in kVAr.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetLargestRealPowerMW">
+<span class="sig-name descname"><span class="pre">GetLargestRealPowerMW</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetLargestRealPowerMW" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the highest branch power in MW.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The highest branch power in MW.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetLargestRealPowerkW">
+<span class="sig-name descname"><span class="pre">GetLargestRealPowerkW</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetLargestRealPowerkW" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the highest branch power in kW.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The highest branch power in kW.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetLossesMVAr">
+<span class="sig-name descname"><span class="pre">GetLossesMVAr</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetLossesMVAr" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the branch losses in MVAr.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The branch losses in MVAr.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetLossesMW">
+<span class="sig-name descname"><span class="pre">GetLossesMW</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetLossesMW" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the branch losses in MW.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The branch losses in MW.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetLosseskVAr">
+<span class="sig-name descname"><span class="pre">GetLosseskVAr</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetLosseskVAr" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the branch losses in kVAr.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The branch losses in kVAr.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetLosseskW">
+<span class="sig-name descname"><span class="pre">GetLosseskW</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetLosseskW" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the branch losses in kW.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The branch losses in kW.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetMaximumProfileIndex">
+<span class="sig-name descname"><span class="pre">GetMaximumProfileIndex</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetMaximumProfileIndex" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the category index which identifies the maximum branch flow from the profile study results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The maximum category index.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetMinimumProfileIndex">
+<span class="sig-name descname"><span class="pre">GetMinimumProfileIndex</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetMinimumProfileIndex" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the category index which identifies the minimum branch flow from the profile study results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The minimum category index.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetProfileMaximumFlowMVA">
+<span class="sig-name descname"><span class="pre">GetProfileMaximumFlowMVA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetProfileMaximumFlowMVA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the maximum branch flow in MVA from the profile study results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The maximum branch flow in MVA from the profile study results.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetProfileMaximumFlowkA">
+<span class="sig-name descname"><span class="pre">GetProfileMaximumFlowkA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetProfileMaximumFlowkA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the maximum branch flow in kA from the profile study results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The maximum branch flow in kA from the profile study results.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetProfileMedianFlowMVA">
+<span class="sig-name descname"><span class="pre">GetProfileMedianFlowMVA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetProfileMedianFlowMVA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the median of the branch flow in MVA from the profile study results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The median of the branch flow in MVA from the profile study results.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetProfileMedianFlowkA">
+<span class="sig-name descname"><span class="pre">GetProfileMedianFlowkA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetProfileMedianFlowkA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the median of the branch flow in kA from the profile study results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The median of the branch flow in kA from the profile study results.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetProfileMinimumFlowMVA">
+<span class="sig-name descname"><span class="pre">GetProfileMinimumFlowMVA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetProfileMinimumFlowMVA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the minimum branch flow in MVA from the profile study results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The minimum branch flow in MVA from the profile study results.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetProfileMinimumFlowkA">
+<span class="sig-name descname"><span class="pre">GetProfileMinimumFlowkA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetProfileMinimumFlowkA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the minimum branch flow in kA from the profile study results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The minimum branch flow in kA from the profile study results.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetRatingMVA">
+<span class="sig-name descname"><span class="pre">GetRatingMVA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nRatingIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetRatingMVA" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">GetRatingMVA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nSection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">nRatingIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span></dt>
+<dd><p>Returns the MVA rating associated with the rating set given by the rating index.
+Set 0 for details of branch rating indices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nSection</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of sections.</p></li>
+<li><p><strong>nRatingIndex</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The rating index.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The MVA rating associated with the rating set.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetRatingReceivekA">
+<span class="sig-name descname"><span class="pre">GetRatingReceivekA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nRatingIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetRatingReceivekA" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">GetRatingReceivekA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nSection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">nRatingIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span></dt>
+<dd><p>Returns the receiving end kA rating associated with the rating set given by the rating index.
+Set 0 for details of branch rating indices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nSection</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of sections.</p></li>
+<li><p><strong>nRatingIndex</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The rating index.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The receiving end kA rating associated with the rating set.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetRatingSendkA">
+<span class="sig-name descname"><span class="pre">GetRatingSendkA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nRatingIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetRatingSendkA" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">GetRatingSendkA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nSection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">nRatingIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span></dt>
+<dd><p>Returns the send end kA rating associated with the rating set given by the rating index.
+Set 0 for details of branch rating indices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nSection</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of sections.</p></li>
+<li><p><strong>nRatingIndex</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The rating index.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The send end kA rating associated with the rating set.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetReactance">
+<span class="sig-name descname"><span class="pre">GetReactance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dOrder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetReactance" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the branch harmonic reactance in per unit on the network base for the harmonic order.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dOrder</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – The harmonic order.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The branch harmonic reactance in per unit.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetReceivePowerMagnitudeMVA">
+<span class="sig-name descname"><span class="pre">GetReceivePowerMagnitudeMVA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetReceivePowerMagnitudeMVA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the branch receiving end power in MVA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The branch receiving end power in MVA.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetReceivePowerMagnitudekVA">
+<span class="sig-name descname"><span class="pre">GetReceivePowerMagnitudekVA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetReceivePowerMagnitudekVA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the branch receiving end power in kVA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The branch receiving end power in kVA.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetReceiveReactivePowerMVAr">
+<span class="sig-name descname"><span class="pre">GetReceiveReactivePowerMVAr</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetReceiveReactivePowerMVAr" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the branch receiving end power in MVAr.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The branch receiving end power in MVAr.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetReceiveReactivePowerkVAr">
+<span class="sig-name descname"><span class="pre">GetReceiveReactivePowerkVAr</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetReceiveReactivePowerkVAr" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the branch receiving end power in kVAr.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The branch receiving end power in kVAr.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetReceiveRealPowerMW">
+<span class="sig-name descname"><span class="pre">GetReceiveRealPowerMW</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetReceiveRealPowerMW" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the branch receiving end power in MW.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The branch receiving end power in MW.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetReceiveRealPowerkW">
+<span class="sig-name descname"><span class="pre">GetReceiveRealPowerkW</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetReceiveRealPowerkW" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the branch receiving end power in kW.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The branch receiving end power in kW.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetResistance">
+<span class="sig-name descname"><span class="pre">GetResistance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dOrder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetResistance" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the branch harmonic resistance in per unit on the network base for the harmonic order.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dOrder</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – The harmonic order.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The branch harmonic resistance in per unit.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetSValue">
+<span class="sig-name descname"><span class="pre">GetSValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nFieldIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetSValue" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">GetSValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nSection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">nFieldIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span></dt>
+<dd><p>Returns a string value for the enumerated field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nSection</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of sections.</p></li>
+<li><p><strong>nFieldIndex</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The field index.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The string value.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetSections">
+<span class="sig-name descname"><span class="pre">GetSections</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetSections" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the number of sections in the branch. All branches have at least one section.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The number of sections in the branch.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetSendPowerMagnitudeMVA">
+<span class="sig-name descname"><span class="pre">GetSendPowerMagnitudeMVA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetSendPowerMagnitudeMVA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the branch sending end power in MVA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The branch sending end power in MVA.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetSendPowerMagnitudekVA">
+<span class="sig-name descname"><span class="pre">GetSendPowerMagnitudekVA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetSendPowerMagnitudekVA" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the branch sending end power in kVA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The branch sending end power in kVA.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetSendReactivePowerMVAr">
+<span class="sig-name descname"><span class="pre">GetSendReactivePowerMVAr</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetSendReactivePowerMVAr" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the branch sending end power in MVAr.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The branch sending end power in MVAr.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetSendReactivePowerkVAr">
+<span class="sig-name descname"><span class="pre">GetSendReactivePowerkVAr</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetSendReactivePowerkVAr" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the branch sending end power in kVAr.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The branch sending end power in kVAr.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetSendRealPowerMW">
+<span class="sig-name descname"><span class="pre">GetSendRealPowerMW</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetSendRealPowerMW" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the branch sending end power in MW.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The branch sending end power in MW.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetSendRealPowerkW">
+<span class="sig-name descname"><span class="pre">GetSendRealPowerkW</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetSendRealPowerkW" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the branch sending end power in kW.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The branch sending end power in kW.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.GetSusceptance">
+<span class="sig-name descname"><span class="pre">GetSusceptance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dOrder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.GetSusceptance" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the branch harmonic susceptance in per unit on the network base for the harmonic order.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dOrder</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – The harmonic order.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The branch harmonic susceptance in per unit.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.SetBValue">
+<span class="sig-name descname"><span class="pre">SetBValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nFieldIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">bValue</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.SetBValue" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">SetBValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nSection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">nFieldIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">bValue</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span></dt>
+<dd><p>Sets the value for the enumerated field from boolean.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nSection</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of sections.</p></li>
+<li><p><strong>nFieldIndex</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The field index.</p></li>
+<li><p><strong>bValue</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – The given boolean value.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if successful.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.SetDValue">
+<span class="sig-name descname"><span class="pre">SetDValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nFieldIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">dValue</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.SetDValue" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">SetDValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nSection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">nFieldIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">dValue</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span></dt>
+<dd><p>Sets the value for the enumerated field from a double.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nSection</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of sections.</p></li>
+<li><p><strong>nFieldIndex</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The field index.</p></li>
+<li><p><strong>dValue</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – The given double value.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if successful.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.SetIValue">
+<span class="sig-name descname"><span class="pre">SetIValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nFieldIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">nValue</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.SetIValue" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">SetIValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nSection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">nFieldIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">nValue</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span></dt>
+<dd><p>Sets the value for the enumerated field from an integer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nSection</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of sections.</p></li>
+<li><p><strong>nFieldIndex</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The field index.</p></li>
+<li><p><strong>nValue</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The given integer value.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if successful.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.SetName">
+<span class="sig-name descname"><span class="pre">SetName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strName</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.SetName" title="Permalink to this definition"></a></dt>
+<dd><p>Sets the name as a string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>strName</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The selected string name.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if successful.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.SetRatingMVA">
+<span class="sig-name descname"><span class="pre">SetRatingMVA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nRatingIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">dRatingMVA</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.SetRatingMVA" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">SetRatingMVA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nSection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">nRatingIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">dRatingMVA</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span></dt>
+<dd><p>Sets the MVA rating to the specified rating MVA for the rating set given by the rating index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nSection</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of sections.</p></li>
+<li><p><strong>nRatingIndex</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The rating index.</p></li>
+<li><p><strong>dRatingMVA</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – The rating MVA.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.SetRatingkA">
+<span class="sig-name descname"><span class="pre">SetRatingkA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nRatingIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">dRatingkA</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.SetRatingkA" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">SetRatingkA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nSection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">nRatingIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">dRatingkA</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span></dt>
+<dd><p>Sets the kA rating to the specified rating kA for the rating set given by the rating index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nSection</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of sections.</p></li>
+<li><p><strong>nRatingIndex</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The rating index.</p></li>
+<li><p><strong>dRatingkA</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – The rating kA.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscBranch.SetSValue">
+<span class="sig-name descname"><span class="pre">SetSValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nFieldIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">strValue</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#ipsa.IscBranch.SetSValue" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">SetSValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nSection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">nFieldIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">strValue</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span></dt>
+<dd><p>Sets the value for the enumerated field from a string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nSection</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of sections.</p></li>
+<li><p><strong>nFieldIndex</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The field index.</p></li>
+<li><p><strong>strValue</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The given string value.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if successful.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="IscBusbar.html" class="btn btn-neutral float-left" title="IscBusbar" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="IscTransformer.html" class="btn btn-neutral float-right" title="IscTransformer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright IPSA.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

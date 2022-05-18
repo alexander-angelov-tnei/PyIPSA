@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IscAnalysisFL &mdash; PyIPSA 1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="IscAnalysisHM" href="IscAnalysisHM.html" />
+    <link rel="prev" title="IscAnalysisLF" href="IscAnalysisLF.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> PyIPSA
+            <img src="_static/ipsa_wo_small.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                v2.10.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Changes%20from%20IPSA%202.9.0.html">Changes from IPSA 2.9.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IPSA%20and%20Python.html">Ipsa and Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Coding%20Requirements.html">Coding Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscInterface.html">IscInterface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscDiagram.html">IscDiagram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscNetwork.html">IscNetwork</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="IscAnalysis.html">IscAnalysis</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="IscAnalysis.html#analysis-classes">Analysis classes</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="IscAnalysisLF.html">IscAnalysisLF</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">IscAnalysisFL</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#field-values">Field Values</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#iscanalysisfl-class">IscAnalysisFL Class</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="IscAnalysisHM.html">IscAnalysisHM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="IscAnalysisDCLF.html">IscAnalysisDCLF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="IscAnalysisAF.html">IscAnalysisAF</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="IscNetComponent.html">IscNetComponent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscNetworkData.html">IscNetworkData</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscBusbar.html">IscBusbar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscBranch.html">IscBranch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscTransformer.html">IscTransformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Isc3WTransformer.html">Isc3WTransformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscLoad.html">IscLoad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscCircuitBreaker.html">IscCircuitBreaker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscIndMachine.html">IscIndMachine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscSynMachine.html">IscSynMachine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscGridInfeed.html">IscGridInfeed</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscFilter.html">IscFilter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscHarmonic.html">IscHarmonic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscStaticVC.html">IscStaticVC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscUMachine.html">IscUMachine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscBattery.html">IscBattery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscDCMachine.html">IscDCMachine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscConverter.html">IscConverter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscMGSet.html">IscMGSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscMechSwCapacitor.html">IscMechSwCapacitor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscGroup.html">IscGroup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscPlugin.html">IscPlugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscVoltageRegulator.html">IscVoltageRegulator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscUnbalancedLine.html">IscUnbalancedLine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscUnbalancedLoad.html">IscUnbalancedLoad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscUnbalancedTransformer.html">IscUnbalancedTransformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscAnnotation.html">IscAnnotation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscProtectionDevice.html">IscProtectionDevice</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PyIPSA</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="IscAnalysis.html">IscAnalysis</a> &raquo;</li>
+      <li>IscAnalysisFL</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/IscAnalysisFL.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="iscanalysisfl">
+<h1>IscAnalysisFL<a class="headerlink" href="#iscanalysisfl" title="Permalink to this headline"></a></h1>
+<section id="field-values">
+<h2>Field Values<a class="headerlink" href="#field-values" title="Permalink to this headline"></a></h2>
+<table class="colwidths-given tight-table docutils align-default" id="id1">
+<caption><span class="caption-text"><strong>IscAnalysisFL Field Values</strong></span><a class="headerlink" href="#id1" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 23%" />
+<col style="width: 68%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Field Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Integer</p></td>
+<td><p>FaultEngine</p></td>
+<td><p>Sets the fault level engine to either the standard Ipsa method or the IEC60909 method. Should be one of:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>0 = Standard Ipsa method</p></li>
+<li><p>1 = IEC60909 method</p></li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Integer</p></td>
+<td><p>FaultStudyType</p></td>
+<td><p>Specifies the type of fault study. Should be one of:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">FaultAllBusbars</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FaultSelectedBusbars</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FaultSingleBusbar</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FaultLine</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FaultTransformer</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FaultWaveformBus</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FaultWaveformBranch</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FaultBreakerDuty</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FaultMotorStart</span></code></p></li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td><p>Float</p></td>
+<td><p>FaultTime</p></td>
+<td><p>Time of fault in seconds.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Float</p></td>
+<td><p>FaultResistance</p></td>
+<td><p>Fault resistance in per unit on the system base.</p></td>
+</tr>
+<tr class="row-even"><td><p>Float</p></td>
+<td><p>FaultReactance</p></td>
+<td><p>Fault reactance in per unit on the system base.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Integer</p></td>
+<td><p>FaultEngineType</p></td>
+<td><p>Type of fault to be applied. Should be one of:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>LineGround</p></li>
+<li><p>LineLine</p></li>
+<li><p>LineLineGround</p></li>
+<li><p>LineLineLine</p></li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td><p>Integer</p></td>
+<td><p>FaultEngineResultType</p></td>
+<td><p>Type of fault result obtained. Should be one of:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>SymRMS</p></li>
+<li><p>AsymPeak</p></li>
+<li><p>AsymRMS</p></li>
+<li><p>BusWave</p></li>
+<li><p>BranchWave</p></li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Integer</p></td>
+<td><p>MaxFaultIterations</p></td>
+<td><p>Maximum number of iterations to run the fault level.</p></td>
+</tr>
+<tr class="row-even"><td><p>Boolean</p></td>
+<td><p>FaultFlatStart</p></td>
+<td><p>Sets voltages at 1 p.u. before calculating fault levels, returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if successful.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Integer</p></td>
+<td><p>UseSaturatedImpedances</p></td>
+<td><p>Uses generator saturated impedances in fault calculation.</p></td>
+</tr>
+<tr class="row-even"><td><p>Integer</p></td>
+<td><p>AssumeAVRAction</p></td>
+<td><p>Assumes generator impedances decay to transient rather than steady state values.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Integer</p></td>
+<td><p>SMSaliency</p></td>
+<td><p>Sets the synchronous machine salience to either the given value or (Xq = Xd). Should be one of:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>0 = As given: The direct axis and quadrature axis parameters entered for each generator will be used in the fault calculations.</p></li>
+<li><p>1 = (Xq = Xd): Steady-state quadrature axis parameters are assumed to be the same as direct axis parameters for all generators.</p></li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td><p>Integer</p></td>
+<td><p>XRCalcMethod</p></td>
+<td><p>Sets the X/R calculation method to either DC decay or Driving Point. Should be one of:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>0 = DC decay: The DC component decays with time, following a single exponential curve, and the X/R ratio will change. <strong>(Note: Under this option the calculation takes the DC component at the time of fault, and the DC component at the specified time after the fault, and then fits a single exponential to these values.)</strong></p></li>
+<li><p>1 = Driving point: The X/R ratio is calculated at the time the fault occurs and does not change.</p></li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Integer</p></td>
+<td><p>XRSMEnhanced</p></td>
+<td><p>Set to 0 to use the Ipsa 2.3.2 method of calculating the DC decay. Set to 1 to use the Ipsa 2.4.2 enhanced method of calculating the DC decay.</p></td>
+</tr>
+<tr class="row-even"><td><p>Boolean</p></td>
+<td><p>FaultUse2ndHarmonic</p></td>
+<td><p>If selected then second harmonic fault level will be included in any peak fault calculation for line-to-line faults.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Integer</p></td>
+<td><p>SingleBusToFault</p></td>
+<td><p>Busbar UID to apply fault on.</p></td>
+</tr>
+<tr class="row-even"><td><p>Integer</p></td>
+<td><p>BranchToFault</p></td>
+<td><p>Branch UID to apply fault on.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Float</p></td>
+<td><p>DistanceAlongBranch</p></td>
+<td><p>Distance along branch to apply fault on. This is a per unit value with zero representing the “From” end of the branch and 1.0 representing the “To” end of the branch.</p></td>
+</tr>
+<tr class="row-even"><td><p>Float</p></td>
+<td><p>IEC909DefaultPhaseAngle</p></td>
+<td><p>Specifies the default synchronous machine power factor. <code class="docutils literal notranslate"><span class="pre">IEC909UseDefaultPF</span></code> should be set to <code class="docutils literal notranslate"><span class="pre">True</span></code> to use this value.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Integer</p></td>
+<td><p>IEC909Method</p></td>
+<td><p>Sets the method used to determine the X/R ratio as defined by:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>1 = IEC 60909 Method A</p></li>
+<li><p>2 = IEC 60909 Method B</p></li>
+<li><p>3 = IEC 60909 Method C</p></li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td><p>Boolean</p></td>
+<td><p>IEC909IgnoreImpedanceCorrection</p></td>
+<td><p>If set to <code class="docutils literal notranslate"><span class="pre">True</span></code> then IEC60909 impedance correction factors will not be applied to generators and power station transformers.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Integer</p></td>
+<td><p>IEC909VoltageCorrectionFactor</p></td>
+<td><p>One of the following IEC60909 voltage level based correction factors to be applied to the pre-fault voltage at the faulted busbar:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>1 = Ignore</p></li>
+<li><p>2 = Cmax (LV + 6%)</p></li>
+<li><p>3 = Cmax (LV + 10%)</p></li>
+<li><p>4 = Cmin</p></li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td><p>Boolean</p></td>
+<td><p>IEC909UseDefaultPF</p></td>
+<td><p>Set to <code class="docutils literal notranslate"><span class="pre">True</span></code> to use the synchronous machine default power factor.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Boolean</p></td>
+<td><p>IEC909NearTo</p></td>
+<td><p>Setting to <code class="docutils literal notranslate"><span class="pre">True</span></code> causes all faults as assumed to be “Near-To”. If it is not selected then the analysis will neglect any decay effects.</p></td>
+</tr>
+<tr class="row-even"><td><p>Integer</p></td>
+<td><p>IEC909TFRatingIndex</p></td>
+<td><p>Identifies which rating set to use for transformers.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Integer</p></td>
+<td><p>FaultPlotSteps</p></td>
+<td><p>Fault plot steps per iteration for waveform plots.</p></td>
+</tr>
+<tr class="row-even"><td><p>Float</p></td>
+<td><p>FaultPlotMaxTime</p></td>
+<td><p>Fault plot max time in seconds for waveform plots.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Boolean</p></td>
+<td><p>FaultPlotinCycles</p></td>
+<td><p>Fault plot time in cycles for waveform plots, returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if successful.</p></td>
+</tr>
+<tr class="row-even"><td><p>Boolean</p></td>
+<td><p>FaultPlotinkA</p></td>
+<td><p>Fault plot current in kA for waveform plots, returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if successful.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>1 = not selected</p></li>
+<li><p>2 = selected</p></li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Boolean</p></td>
+<td><p>FaultPlotRed</p></td>
+<td><p>Fault plot red phase for waveform plots, returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if successful.</p></td>
+</tr>
+<tr class="row-even"><td><p>Boolean</p></td>
+<td><p>FaultPlotYellow</p></td>
+<td><p>Fault plot yellow phase for waveform plots, returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if successful.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Boolean</p></td>
+<td><p>FaultPlotBlue</p></td>
+<td><p>Fault plot blue phase for waveform plots, returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if successful.</p></td>
+</tr>
+<tr class="row-even"><td><p>Boolean</p></td>
+<td><p>FaultPlotDC</p></td>
+<td><p>Fault plot DC component for waveform plots, returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if successful.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Boolean</p></td>
+<td><p>FaultPlotRMS</p></td>
+<td><p>Fault plot RMS component for waveform plots, returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if successful.</p></td>
+</tr>
+<tr class="row-even"><td><p>Boolean</p></td>
+<td><p>FaultPlot2Harm</p></td>
+<td><p>Fault plot 2nd harmonic component for waveform plots, returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if successful.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Boolean</p></td>
+<td><p>FaultPlotMaxAsymmRed</p></td>
+<td><p>Fault plot maximum asymmetry in red phase for waveform plots, returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if successful.</p></td>
+</tr>
+<tr class="row-even"><td><p>Integer</p></td>
+<td><p>MotorToStart</p></td>
+<td><p>The motor calculation is started for the motor UID.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="iscanalysisfl-class">
+<h2>IscAnalysisFL Class<a class="headerlink" href="#iscanalysisfl-class" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ipsa.IscAnalysisFL">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ipsa.</span></span><span class="sig-name descname"><span class="pre">IscAnalysisFL</span></span><a class="headerlink" href="#ipsa.IscAnalysisFL" title="Permalink to this definition"></a></dt>
+<dd><p>Analysis class for the fault level analysis.
+Motor start analysis options are provided under the fault level analysis class.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscAnalysisFL.GetBValue">
+<span class="sig-name descname"><span class="pre">GetBValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nFieldIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#ipsa.IscAnalysisFL.GetBValue" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a boolean value for the enumerated field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>nFieldIndex</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The given enumerated field.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The boolean value for the field.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscAnalysisFL.GetBusesToFault">
+<span class="sig-name descname"><span class="pre">GetBusesToFault</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ipsa.IscAnalysisFL.GetBusesToFault" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a list of busbar UIDs representing the busbars that have been selected to be faulted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The list of faulted busbars.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)">list</a>(<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscAnalysisFL.GetDValue">
+<span class="sig-name descname"><span class="pre">GetDValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nFieldIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#ipsa.IscAnalysisFL.GetDValue" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a float value for the enumerated field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>nFieldIndex</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The given enumerated field.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The float value for the field.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscAnalysisFL.GetFieldName">
+<span class="sig-name descname"><span class="pre">GetFieldName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nFieldIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#ipsa.IscAnalysisFL.GetFieldName" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the field name as a string for the enumerated field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>nFieldIndex</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The given enumerated field.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The field name.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscAnalysisFL.GetFieldType">
+<span class="sig-name descname"><span class="pre">GetFieldType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nFieldIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#ipsa.IscAnalysisFL.GetFieldType" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the field type as a string for the enumerated field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>nFieldIndex</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The given enumerated field.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The field type.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscAnalysisFL.GetIValue">
+<span class="sig-name descname"><span class="pre">GetIValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nFieldIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#ipsa.IscAnalysisFL.GetIValue" title="Permalink to this definition"></a></dt>
+<dd><p>Returns an integer value for the enumerated field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>nFieldIndex</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The given enumerated field.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The integer value for the field.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscAnalysisFL.GetSValue">
+<span class="sig-name descname"><span class="pre">GetSValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nFieldIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#ipsa.IscAnalysisFL.GetSValue" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a string value for the enumerated field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>nFieldIndex</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The given enumerated field.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The string value for the field.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscAnalysisFL.SetBValue">
+<span class="sig-name descname"><span class="pre">SetBValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nFieldIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">bValue</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#ipsa.IscAnalysisFL.SetBValue" title="Permalink to this definition"></a></dt>
+<dd><p>Sets the integer value for the enumerated field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nFieldIndex</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The given enumerated field.</p></li>
+<li><p><strong>bValue</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – The boolean value that will be set.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if successful.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscAnalysisFL.SetBusesToFault">
+<span class="sig-name descname"><span class="pre">SetBusesToFault</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nUIDs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ipsa.IscAnalysisFL.SetBusesToFault" title="Permalink to this definition"></a></dt>
+<dd><p>Specifies which busbars will be faulted as defined by the list of busbar UIDs.
+Only applicable when the FaultStudyType is set to FaultSelectedBusbars.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>nUIDs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a><em>)</em>) – The list of busbar UIDs which will be faulted.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscAnalysisFL.SetDValue">
+<span class="sig-name descname"><span class="pre">SetDValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nFieldIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">dValue</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#ipsa.IscAnalysisFL.SetDValue" title="Permalink to this definition"></a></dt>
+<dd><p>Sets the float value for the enumerated field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nFieldIndex</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The given enumerated field.</p></li>
+<li><p><strong>dValue</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – The float value that will be set.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if successful.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscAnalysisFL.SetIValue">
+<span class="sig-name descname"><span class="pre">SetIValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nFieldIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">nValue</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#ipsa.IscAnalysisFL.SetIValue" title="Permalink to this definition"></a></dt>
+<dd><p>Sets the integer value for the enumerated field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nFieldIndex</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The given enumerated field.</p></li>
+<li><p><strong>nValue</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The integer value that will be set.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if successful.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ipsa.IscAnalysisFL.SetSValue">
+<span class="sig-name descname"><span class="pre">SetSValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nFieldIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">strValue</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#ipsa.IscAnalysisFL.SetSValue" title="Permalink to this definition"></a></dt>
+<dd><p>Sets the string value for the enumerated field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nFieldIndex</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The given enumerated field.</p></li>
+<li><p><strong>strValue</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The string value that will be set.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if successful.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="IscAnalysisLF.html" class="btn btn-neutral float-left" title="IscAnalysisLF" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="IscAnalysisHM.html" class="btn btn-neutral float-right" title="IscAnalysisHM" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright IPSA.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

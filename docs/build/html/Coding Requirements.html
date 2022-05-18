@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coding Requirements &mdash; PyIPSA 1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="IscInterface" href="IscInterface.html" />
+    <link rel="prev" title="Ipsa and Python" href="IPSA%20and%20Python.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> PyIPSA
+            <img src="_static/ipsa_wo_small.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                v2.10.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Changes%20from%20IPSA%202.9.0.html">Changes from IPSA 2.9.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IPSA%20and%20Python.html">Ipsa and Python</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Coding Requirements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#importing-ipsa">Importing IPSA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ipsa-unique-identifiers-and-names">IPSA unique identifiers and names</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#debugging-scripts">Debugging Scripts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#debugging-with-an-ide">Debugging with an IDE</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#coding-methods">Coding Methods</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#execution-speed">Execution Speed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#memory-requirements">Memory Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changing-data">Changing Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adding-and-editing-components">Adding and Editing Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#setting-analysis-engine-data">Setting Analysis Engine Data</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="IscInterface.html">IscInterface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscDiagram.html">IscDiagram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscNetwork.html">IscNetwork</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscAnalysis.html">IscAnalysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscNetComponent.html">IscNetComponent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscNetworkData.html">IscNetworkData</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscBusbar.html">IscBusbar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscBranch.html">IscBranch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscTransformer.html">IscTransformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Isc3WTransformer.html">Isc3WTransformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscLoad.html">IscLoad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscCircuitBreaker.html">IscCircuitBreaker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscIndMachine.html">IscIndMachine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscSynMachine.html">IscSynMachine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscGridInfeed.html">IscGridInfeed</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscFilter.html">IscFilter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscHarmonic.html">IscHarmonic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscStaticVC.html">IscStaticVC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscUMachine.html">IscUMachine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscBattery.html">IscBattery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscDCMachine.html">IscDCMachine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscConverter.html">IscConverter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscMGSet.html">IscMGSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscMechSwCapacitor.html">IscMechSwCapacitor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscGroup.html">IscGroup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscPlugin.html">IscPlugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscVoltageRegulator.html">IscVoltageRegulator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscUnbalancedLine.html">IscUnbalancedLine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscUnbalancedLoad.html">IscUnbalancedLoad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscUnbalancedTransformer.html">IscUnbalancedTransformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscAnnotation.html">IscAnnotation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscProtectionDevice.html">IscProtectionDevice</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PyIPSA</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Coding Requirements</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/Coding Requirements.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="coding-requirements">
+<h1>Coding Requirements<a class="headerlink" href="#coding-requirements" title="Permalink to this headline"></a></h1>
+<section id="importing-ipsa">
+<h2>Importing IPSA<a class="headerlink" href="#importing-ipsa" title="Permalink to this headline"></a></h2>
+<p>All IPSA scripts should import the IPSA interface (<code class="docutils literal notranslate"><span class="pre">IscInterface</span></code>) using the import command near the start of the script. It is also recommended to import the print module which enables scripts to print directly to the IPSA progress window.</p>
+<p>Starting from IPSA 2.3.2 there are two ways of launching IPSA 2, either from within IPSA 2 itself or from a separate Python process. The following code demonstrates how scripts should be written when launched from within IPSA 2. Refer to section 2.2.2 for details of running IPSA 2 from a separate Python process.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialise Scripting interface into IPSA+</span>
+<span class="kn">import</span> <span class="nn">ipsa</span>
+<span class="c1"># Get IPSA scripting instance</span>
+<span class="n">ipsascript</span> <span class="o">=</span> <span class="n">ipsa</span><span class="o">.</span><span class="n">GetScriptInterface</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Welcome to IPSA&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It is important to ensure that there is only one <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">ipsa</span></code> statement in the full extent of the code. Calling <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">ipsa</span></code> multiple times in the same Python session may result in unexpected errors.</p>
+</section>
+<section id="ipsa-unique-identifiers-and-names">
+<h2>IPSA unique identifiers and names<a class="headerlink" href="#ipsa-unique-identifiers-and-names" title="Permalink to this headline"></a></h2>
+<p>IPSA assigns all components and graphical objects a unique integer number called a UID, which is used for referencing the individual component. These UIDs can be seen in the IPSA i2f files and can also be used by scripts. Component classes include functions to obtain the UID and to perform operations, such as filtering results, using them.</p>
+<p>The component UIDs provide the best method of referring to individual components in a script. The UID of an individual component will never change during the execution of the script. Since it is an integer it is also passed efficiently between different functions in the script. The component UIDs are normally obtained from functions such as <code class="docutils literal notranslate"><span class="pre">GetBusbarUID()</span></code>.</p>
+<p>Some functions return the IPSA object itself, such as <code class="docutils literal notranslate"><span class="pre">GetBusbar()</span></code>, which are required when the script needs to read or write component data. Due to the way in which the Python IPSA interface works these objects are not guaranteed to refer to the same component. They exist only in the Python script and may be deleted or overwritten by IPSA. This typically occurs when the script calls a <code class="docutils literal notranslate"><span class="pre">Get</span></code> type function and the internal IPSA data maps are deleted and recreated. It is recommended that the objects returned by functions such as <code class="docutils literal notranslate"><span class="pre">GetBusbar()</span></code> are used immediately.</p>
+<p>It is important to note that the UIDs are only unique across a single network. Different network files will use the same UIDs and therefore the UIDs must never be used to refer to components in multiple networks.</p>
+<p>Some functions also accept and return Python names for IPSA network components, for example, the <code class="docutils literal notranslate"><span class="pre">GetName()</span></code> functions. These names are also unique and are in the following format:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Busbar1</span>                     <span class="c1"># busbar name</span>
+<span class="n">Busbar1</span><span class="o">.</span><span class="n">Load</span>                <span class="c1"># radial component</span>
+<span class="n">Busbar1</span><span class="o">.</span><span class="n">Busbar2</span><span class="o">.</span><span class="n">Branch</span>      <span class="c1"># branch component</span>
+</pre></div>
+</div>
+</section>
+<section id="debugging-scripts">
+<h2>Debugging Scripts<a class="headerlink" href="#debugging-scripts" title="Permalink to this headline"></a></h2>
+<p>When IPSA encounters an error in a script a traceback message is usually produced in the form shown below. This message is printed in the IPSA progress window and provides details of the error.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">Nov</span> <span class="mi">6</span> <span class="mi">12</span> <span class="mi">22</span><span class="p">:</span><span class="mi">53</span><span class="p">:</span><span class="mi">23</span><span class="p">]</span> <span class="n">Traceback</span><span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+<span class="n">File</span> <span class="s2">&quot;C:/Program Files/IpsaPower/Ipsa 2.2/scripts/PyTester.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">18</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="n">gens</span> <span class="o">=</span> <span class="n">ipsa_network</span><span class="o">.</span><span class="n">GetIndMachines</span><span class="p">()</span>
+<span class="ne">AttributeError</span><span class="p">:</span> <span class="s1">&#39;NoneType&#39;</span> <span class="nb">object</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s1">&#39;GetIndMachines&#39;</span>
+</pre></div>
+</div>
+<p>This provides details of the line number and file name where the error was found, in this case line 18 in file PyTester.py. The error is reported as an <code class="docutils literal notranslate"><span class="pre">AttributeError</span></code>, in the example above the <code class="docutils literal notranslate"><span class="pre">ipsa_network</span></code> variable does not have a function, or attribute, called <code class="docutils literal notranslate"><span class="pre">GetIndMachines()</span></code>. More advanced debugging is also provided as described in the following section.</p>
+<section id="debugging-with-an-ide">
+<h3>Debugging with an IDE<a class="headerlink" href="#debugging-with-an-ide" title="Permalink to this headline"></a></h3>
+<p>IPSA 2 scripts can be debugged using an Integrated Development Environment such as Wing© available from <a class="reference external" href="http://wingware.com/">wingware.com</a>. This allows developers to step through code line by line and examine variables as the script is run.</p>
+<p>It is recommended that more complex scripts are developed using PyIPSA. This allows the users’ script to be started from the IDE and code can then be stepped through as required.</p>
+<p>Once the code has been debugged it can then be quickly converted to run from normal IPSA by changing the original IscInterface loading function.</p>
+</section>
+</section>
+<section id="coding-methods">
+<h2>Coding Methods<a class="headerlink" href="#coding-methods" title="Permalink to this headline"></a></h2>
+<section id="execution-speed">
+<h3>Execution Speed<a class="headerlink" href="#execution-speed" title="Permalink to this headline"></a></h3>
+<p>Complex scripts may have long execution times and some additional functions have been provided to reduce this time. These are summarised below:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">SetLoadPower()</span></code> - changes the MW and MVAr of a load in the analysis engine only</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SetLoadStatus()</span></code> - changes the MW and MVAr of a load in the analysis engine only</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SetGeneratorPower()</span></code> - changes the MW and MVAr of a generator in the analysis engine only</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SetGeneratorStatus()</span></code> - changes the MW and MVAr of a generator in the analysis engine only</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SetBranchStatus()</span></code> - changes the MW and MVAr of a load in the analysis engine only</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DoLoadFlow()</span></code> - This function includes an option to perform a load flow calculation based on the data currently in the engine</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SetEngineMessageSuppresion()</span></code> - prevents the user interface displaying analysis engine messages</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AllowStackBarUpdates()</span></code> - prevents the user interface from redrawing the stack bar</p></li>
+</ul>
+</section>
+<section id="memory-requirements">
+<h3>Memory Requirements<a class="headerlink" href="#memory-requirements" title="Permalink to this headline"></a></h3>
+<p>Memory issues have been encountered when running a significant number of studies. For example, running many load flow studies on a network will slowly use up all the maximum allowable memory for the Python process, approximately 1.3Gb. This is understood to be a result of the Python garbage collection not releasing memory back to the operating system. To avoid this issue, it is possible to run scripted IPSA as a set of separate processes. Please contact <a class="reference external" href="mailto:support&#37;&#52;&#48;ipsa-power&#46;com">support<span>&#64;</span>ipsa-power<span>&#46;</span>com</a> for further details.</p>
+</section>
+<section id="changing-data">
+<h3>Changing Data<a class="headerlink" href="#changing-data" title="Permalink to this headline"></a></h3>
+<p>Most of the objects are accessed via scripting, such as components, diagrams, analysis functions etc, have an associated set of data fields which the script can get and set, for example the nominal busbar voltage, the branch status or the load flow convergence tolerance. The majority of operations with components require the use of field values to access various data fields. There are four data types in common use, integers, strings, boolean variables and float numbers. There are therefore four functions to set and four functions to get these different data types from a component. Note that some functions may use lists of these types. The general get and set functions are as follows:</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Get Functions</p></th>
+<th class="head"><p>Set Functions</p></th>
+<th class="head"><p>Python Data Type</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><cite>GetBValue</cite></p></td>
+<td><p><cite>SetBValue</cite></p></td>
+<td><p>Boolean</p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>GetDValue</cite></p></td>
+<td><p><cite>SetDValue</cite></p></td>
+<td><p>Float</p></td>
+</tr>
+<tr class="row-even"><td><p><cite>GetIValue</cite></p></td>
+<td><p><cite>SetIValue</cite></p></td>
+<td><p>Integer</p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>GetSValue</cite></p></td>
+<td><p><cite>SetSValue</cite></p></td>
+<td><p>String</p></td>
+</tr>
+</tbody>
+</table>
+<p>Field indexes must be used to get and set specific items for a component. These indexes are defined for each component class and listed in the relevant sections. Field indexes are usually required in the following format, separated by dots:</p>
+<ul class="simple">
+<li><p>Starting with the IPSA module name</p></li>
+<li><p>Followed by the class name</p></li>
+<li><p>Ending with the field name</p></li>
+</ul>
+<p>The following example illustrates this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SetDValue</span><span class="p">(</span><span class="n">ipsa</span><span class="o">.</span><span class="n">IscBusbar</span><span class="o">.</span><span class="n">NomVoltkV</span><span class="p">,</span> <span class="mf">33.0</span><span class="p">)</span>   <span class="c1"># Set the nominal busbar voltage</span>
+                                            <span class="c1"># to 33kV</span>
+<span class="n">GetDValue</span><span class="p">(</span><span class="n">ipsa</span><span class="o">.</span><span class="n">IscBusbar</span><span class="o">.</span><span class="n">NomVoltkV</span><span class="p">)</span>         <span class="c1"># Get the nominal bus voltage</span>
+</pre></div>
+</div>
+<p>The sample code below provides some simple examples.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialise Scripting interface into IPSA 2</span>
+<span class="kn">import</span> <span class="nn">ipsa</span>
+<span class="n">ipsascript</span> <span class="o">=</span> <span class="n">ipsa</span><span class="o">.</span><span class="n">IscInterface</span><span class="p">()</span>
+
+<span class="c1"># load or create a new network</span>
+<span class="n">ipsascript</span><span class="o">.</span><span class="n">ReadFile</span><span class="p">(</span><span class="s1">&#39;Refinery.i2f&#39;</span><span class="p">)</span>
+<span class="c1"># return an IscNetwork instance representing the new network</span>
+<span class="n">ipsa_network</span> <span class="o">=</span> <span class="n">ipsascript</span><span class="o">.</span><span class="n">GetNetwork</span><span class="p">()</span>
+
+<span class="c1"># Set data example</span>
+<span class="n">busbar</span> <span class="o">=</span> <span class="n">ipsa_network</span><span class="o">.</span><span class="n">GetBusbar</span><span class="p">(</span><span class="s1">&#39;SUB 2&#39;</span><span class="p">)</span>
+<span class="c1"># set the bus voltage</span>
+<span class="n">busbar</span><span class="o">.</span><span class="n">SetDValue</span><span class="p">(</span><span class="n">ipsa</span><span class="o">.</span><span class="n">IscBusbar</span><span class="o">.</span><span class="n">NomVoltkV</span><span class="p">,</span> <span class="mf">11.0</span><span class="p">)</span>
+
+<span class="c1"># get the nominal voltage at SUB 2</span>
+<span class="n">dSub2Voltage</span> <span class="o">=</span> <span class="n">busbar</span><span class="o">.</span><span class="n">GetDValue</span><span class="p">(</span><span class="n">ipsa</span><span class="o">.</span><span class="n">IscBusbar</span><span class="o">.</span><span class="n">NomVoltkV</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The voltage at SUB 2 is&quot;</span><span class="p">,</span> <span class="n">dSub2Voltage</span><span class="p">,</span> <span class="s2">&quot;kV&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="adding-and-editing-components">
+<h3>Adding and Editing Components<a class="headerlink" href="#adding-and-editing-components" title="Permalink to this headline"></a></h3>
+<p>In order to achieve optimum efficiency in terms of speed and memory usage, there are some simple recommendations regarding the execution order of statements. A common example is creating multiple components and editing the associated data. Due to the way IPSA refreshes its internal data the most efficient way to achieve this is to create all the new components first and then set the data.</p>
+<p>IPSA creates internal data maps to store the component data accessed via scripting. These data maps must be rebuilt after components are added or deleted from the network. Changing component data does not require these maps to be rebuilt, but IPSA will automatically rebuild the maps if components have been added or deleted.</p>
+<p>Therefore the most efficient way to add and edit components is to add all components first, then edit the component data. This will ensure that the data maps are only rebuilt once when a component is accessed to change its data. The <code class="docutils literal notranslate"><span class="pre">Get</span></code> functions have a <code class="docutils literal notranslate"><span class="pre">bFetchFromSystem</span></code> flag, setting this to <code class="docutils literal notranslate"><span class="pre">True</span></code> will force IPSA to rebuild its internal maps. Setting it to <code class="docutils literal notranslate"><span class="pre">False</span></code> will prevent these maps from being rebuilt unless required, i.e. they may still be rebuilt if components have been added or deleted.</p>
+<p>For clarity no error checking is included in this example. For robust code, it is recommended that the return values of the various functions are checked to confirm they have executed correctly. For example, if IPSA fails to create one of the busbars then the following calls to set the voltages for that busbar will fail.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialise Scripting interface into IPSA</span>
+<span class="kn">import</span> <span class="nn">ipsa</span>
+
+<span class="c1"># create a new network</span>
+<span class="n">ipsascript</span> <span class="o">=</span> <span class="n">ipsa</span><span class="o">.</span><span class="n">IscInterface</span><span class="p">()</span>
+<span class="n">ipsascript</span><span class="o">.</span><span class="n">CreateNewNetwork</span><span class="p">(</span><span class="mf">100.0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># return an IscNetwork instance representing the new network</span>
+<span class="n">ipsa_network</span> <span class="o">=</span> <span class="n">ipsascript</span><span class="o">.</span><span class="n">GetNetwork</span><span class="p">()</span>
+
+<span class="c1"># list of busbars and associated voltages to create</span>
+<span class="n">busbar_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Grid&quot;</span><span class="p">,</span> <span class="s2">&quot;Substation&quot;</span><span class="p">,</span> <span class="s2">&quot;Primary&quot;</span><span class="p">,</span> <span class="s2">&quot;Secondary&quot;</span><span class="p">,</span> <span class="s2">&quot;Customer&quot;</span><span class="p">]</span>
+<span class="n">busbar_voltages</span> <span class="o">=</span> <span class="p">[</span><span class="mf">132.0</span><span class="p">,</span> <span class="mf">33.0</span><span class="p">,</span> <span class="mf">11.0</span><span class="p">,</span> <span class="mf">11.0</span><span class="p">,</span> <span class="mf">0.415</span><span class="p">]</span>
+<span class="c1"># create an empty list to store bus UIDs in</span>
+<span class="n">busbar_uids</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># create all busbar objects and save UIDs</span>
+<span class="k">for</span> <span class="n">bus</span> <span class="ow">in</span> <span class="n">busbar_list</span><span class="p">:</span>
+    <span class="n">uid</span> <span class="o">=</span> <span class="n">ipsa_network</span><span class="o">.</span><span class="n">CreateBusbar</span><span class="p">(</span><span class="n">bus</span><span class="p">)</span>
+    <span class="n">busbar_uids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">uid</span><span class="p">)</span>
+
+<span class="c1"># add busbar voltages, need to access busbars using UIDs</span>
+<span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">busbar_uids</span><span class="p">)):</span>
+    <span class="n">busbar</span> <span class="o">=</span> <span class="n">ipsa_network</span><span class="o">.</span><span class="n">GetBusbar</span><span class="p">(</span><span class="n">busbar_uids</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+    <span class="n">busbar</span><span class="o">.</span><span class="n">SetDValue</span><span class="p">(</span><span class="n">ipsa</span><span class="o">.</span><span class="n">IscBusbar</span><span class="o">.</span><span class="n">NomVoltkV</span><span class="p">,</span> <span class="n">busbar_voltages</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="setting-analysis-engine-data">
+<h3>Setting Analysis Engine Data<a class="headerlink" href="#setting-analysis-engine-data" title="Permalink to this headline"></a></h3>
+<p>Virtually all the functions presented in this manual operate on the main IPSA data model and therefore any changes can be saved within the network. There are a few functions which do not affect the main IPSA data model but change the data loaded into the calculation engine instead. These changes do not get reflected in the saved network or the network that a user would see in the User Interface. These functions allow simple changes to be made to improve calculation speed when undertaking large numbers of studies. For additional details see the IscAnalysis classes.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="IPSA%20and%20Python.html" class="btn btn-neutral float-left" title="Ipsa and Python" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="IscInterface.html" class="btn btn-neutral float-right" title="IscInterface" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright IPSA.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

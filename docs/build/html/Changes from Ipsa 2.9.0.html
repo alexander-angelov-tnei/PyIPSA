@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Changes from IPSA 2.9.0 &mdash; PyIPSA 1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Ipsa and Python" href="IPSA%20and%20Python.html" />
+    <link rel="prev" title="Welcome to PyIPSA’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> PyIPSA
+            <img src="_static/ipsa_wo_small.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                v2.10.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Changes from IPSA 2.9.0</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#setting-licences-from-environment-variables">Setting licences from environment variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-arcflash-through-pyipsa">Running ArcFlash through PyIPSA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#storage-components-and-flip-functionality">Storage components and flip functionality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#standard-features-updated">Standard  features updated</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="IPSA%20and%20Python.html">Ipsa and Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Coding%20Requirements.html">Coding Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscInterface.html">IscInterface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscDiagram.html">IscDiagram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscNetwork.html">IscNetwork</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscAnalysis.html">IscAnalysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscNetComponent.html">IscNetComponent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscNetworkData.html">IscNetworkData</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscBusbar.html">IscBusbar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscBranch.html">IscBranch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscTransformer.html">IscTransformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Isc3WTransformer.html">Isc3WTransformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscLoad.html">IscLoad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscCircuitBreaker.html">IscCircuitBreaker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscIndMachine.html">IscIndMachine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscSynMachine.html">IscSynMachine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscGridInfeed.html">IscGridInfeed</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscFilter.html">IscFilter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscHarmonic.html">IscHarmonic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscStaticVC.html">IscStaticVC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscUMachine.html">IscUMachine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscBattery.html">IscBattery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscDCMachine.html">IscDCMachine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscConverter.html">IscConverter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscMGSet.html">IscMGSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscMechSwCapacitor.html">IscMechSwCapacitor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscGroup.html">IscGroup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscPlugin.html">IscPlugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscVoltageRegulator.html">IscVoltageRegulator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscUnbalancedLine.html">IscUnbalancedLine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscUnbalancedLoad.html">IscUnbalancedLoad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscUnbalancedTransformer.html">IscUnbalancedTransformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscAnnotation.html">IscAnnotation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IscProtectionDevice.html">IscProtectionDevice</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PyIPSA</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Changes from IPSA 2.9.0</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/Changes from IPSA 2.9.0.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="changes-from-ipsa-2-9-0">
+<h1>Changes from IPSA 2.9.0<a class="headerlink" href="#changes-from-ipsa-2-9-0" title="Permalink to this headline"></a></h1>
+<section id="setting-licences-from-environment-variables">
+<h2>Setting licences from environment variables<a class="headerlink" href="#setting-licences-from-environment-variables" title="Permalink to this headline"></a></h2>
+<p>There is a new option, only available for IPSA Linux for now, in order to set a Sentinel LDK license in IPSA. It is now possible to set the Sentinel LDK license Key ID in an environmental variable, and PyIPSA will automatically check the environmental variable if no other license is set. This enables users to run PyIPSA from non-desktop environment operative systems. The environment variable to be set is <strong>IPSALDKLICENSE</strong> and it expects an 18-digit (or less) license Key ID. For more details contact <em>support&#64;ipsa-power.com</em>.</p>
+</section>
+<section id="running-arcflash-through-pyipsa">
+<h2>Running ArcFlash through PyIPSA<a class="headerlink" href="#running-arcflash-through-pyipsa" title="Permalink to this headline"></a></h2>
+<p>New infrastructure with <code class="docutils literal notranslate"><span class="pre">IscAnalysisAF</span></code> and the <code class="docutils literal notranslate"><span class="pre">RunArcFlash()</span></code> functionality enables users to execute network wide arc flash calculations with the new and improved Arc Flash engine. Users can now set parameters as they would in the UI, run a preliminary fault level to get the base bolted currents, and show a full network diagnosis for the flash incident energy details at all busbar sites.</p>
+</section>
+<section id="storage-components-and-flip-functionality">
+<h2>Storage components and flip functionality<a class="headerlink" href="#storage-components-and-flip-functionality" title="Permalink to this headline"></a></h2>
+<p>The new functionality whereby synchronous machines can behave like energy storage units has been transferred to PyIPSA. This means you can do local and global flip implementations on storages between import and export and hold all the technology/staging information in the <code class="docutils literal notranslate"><span class="pre">IscSynMachine</span></code> objects just as in the UI.</p>
+</section>
+<section id="standard-features-updated">
+<h2>Standard  features updated<a class="headerlink" href="#standard-features-updated" title="Permalink to this headline"></a></h2>
+<p>The following functionality has been updated and correctly mapped to PyIPSA:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">AutoSelectSlacks</span></code> now correctly assigns the slacks before a load flow calculation.</p></li>
+<li><p>The DC Load Flow module has been improved and efficiently mapped with the <code class="docutils literal notranslate"><span class="pre">IscAnalysisDCLF</span></code> class.</p></li>
+<li><p>Users can now set the flat start with added flexibility and set the global busbar and branch overload limits from Python.</p></li>
+<li><p>Customised contingencies can be designed using the <code class="docutils literal notranslate"><span class="pre">CreateSpecificContingency</span></code> function.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to PyIPSA’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="IPSA%20and%20Python.html" class="btn btn-neutral float-right" title="Ipsa and Python" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright IPSA.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
